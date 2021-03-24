@@ -14,10 +14,8 @@ case class Player(name: String, score: Int = 0) extends playerInterface {
     score = n
     score
   }*/
-  override def updateScore(newScore: Int): Player = {
-    //val newPlayer = this.copy(this.name, newScore)
-    //print(this.score)
-    this.copy(score = newScore)
-  }
+
+  override def setName(newName: String): playerInterface = copy(name = newName)
+  override def updateScore(newScore: Int): playerInterface = copy(score = newScore)
 
 }

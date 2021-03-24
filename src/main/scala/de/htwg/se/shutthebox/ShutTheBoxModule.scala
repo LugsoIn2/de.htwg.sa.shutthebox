@@ -18,13 +18,12 @@ import de.htwg.se.shutthebox.model.fileIoComponent._
 
 class ShutTheBoxModule extends AbstractModule with ScalaModule {
 
-
   override def configure() = {
     bind[ControllerInterface].to[controllerBaseImpl.Controller]
     bind[fieldInterface].annotatedWithName("normal").toInstance(new Field())
     bind[fieldInterface].annotatedWithName("big").toInstance(new BigField())
-    bind[playerInterface].annotatedWithName("player1").toInstance(new Player("Player1"))
-    bind[playerInterface].annotatedWithName("player2").toInstance(new Player("Player2"))
+    bind[playerInterface].annotatedWithName("player1").toInstance(new Player("Player 1"))
+    bind[playerInterface].annotatedWithName("player2").toInstance(new Player("Player 2"))
 
     bind[FileIOInterface].to[fileIoJsonImpl.FileIO]
   }
