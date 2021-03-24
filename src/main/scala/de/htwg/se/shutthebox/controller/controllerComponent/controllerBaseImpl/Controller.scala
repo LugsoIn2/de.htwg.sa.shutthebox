@@ -47,8 +47,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     createField(t)
     createPlayers(ai)
     resetMatchfield()
-    //getPlayers(0).setName(1)   // problems with code coverage
-    //getPlayers(1).setName(2)   // NullPointerException or infinite loop for input
     //setCurrentPlayer()
     gameState=INGAME
   }
@@ -74,20 +72,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def createPlayers(ai:Boolean): Unit = {
     players(0) = injector.instance[playerInterface](Names.named("player1"))
-    players(1) = injector.instance[playerInterface](Names.named("player2"))
-
-    print("PLAYER1: " + players(0).name + "\n")
-    print("PLAYER2: " + players(1).name + "\n")
-    /*
     if (ai) {
       //players(1) = new AI(this)
     } else {
       players(1) = injector.instance[playerInterface](Names.named("player2"))
-    }*/
+    }
     currentPlayer = players(0)
     currentPlayerIndex = 0
     print("PLAYER1: " + players(0).name + "\n")
-    print("PLAYER2: " + players(1).name + "\n")
+    print("PLAYER2: " + getPlayers(1).name + "\n")
 
     publish(new PlayersCreated)
   }
@@ -102,9 +95,9 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def setCurrentPlayer(): Unit = {
     currentPlayerIndex += 1
-
     if (currentPlayerIndex < 2) {
       players(currentPlayerIndex - 1) = currentPlayer.updateScore(getScore)
+      print(players(currentPlayerIndex - 1))
       resetMatchfield()
 
       if (currentPlayer == players(0)) {
@@ -118,6 +111,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       }
       publish(new CurrentPlayerSet)
     } else {
+      currentPlayer = players(currentPlayerIndex - 1)
       players(currentPlayerIndex - 1 ) = currentPlayer.updateScore(getScore)
       publish(new ShowScoreBoard)
     }
