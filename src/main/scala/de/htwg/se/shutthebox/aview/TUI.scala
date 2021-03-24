@@ -97,19 +97,19 @@ class TUI(controller:ControllerInterface) extends Reactor {
   def printScoreBoard() : String = {
     var output = "\n"
     output += "========= SCOREBOARD ==========\n"
-    output += controller.getPlayers(0).plrName
+    output += controller.getPlayers(0).name
     output += ": "
     output += controller.getPlayers(0).score + "\n"
-    output += controller.getPlayers(1).plrName
+    output += controller.getPlayers(1).name
     output += ": "
     output += controller.getPlayers(1).score + "\n"
     output += "==================================\n"
 
     if (controller.getPlayers(0).score < controller.getPlayers(1).score) {
-      output += controller.getPlayers(0).plrName
+      output += controller.getPlayers(0).name
       output += " wins!!!\n"
     } else if (controller.getPlayers(0).score > controller.getPlayers(1).score) {
-      output += controller.getPlayers(1).plrName
+      output += controller.getPlayers(1).name
       output += " wins!!!\n"
     } else {
       output += "The game ends in a draw! :-(\n"

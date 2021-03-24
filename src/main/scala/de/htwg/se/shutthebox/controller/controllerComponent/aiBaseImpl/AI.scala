@@ -9,18 +9,12 @@ import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.Future
 import scala.swing.{Frame, Swing}
 
-class AI(controller:Controller) extends Player with aiInterface {
+class AI(controller:Controller) extends aiInterface {
 
   //var gui:Frame = ShutTheBox.gui
   var validShuts:Array[Int] = Array.ofDim[Int](4)
   var singleShuts:Array[Int] = Array.ofDim[Int](2)
   var allowFuture = false
-
-  override def setName(index:Integer) : String = {
-    printf("Player " + index + ":")
-    plrName = "AI"//readLine()
-    plrName
-  }
 
   def randomTimeMillis(min:Int, max:Int) : Int = {
     var value = min + scala.util.Random.nextInt((max - min) + 1)

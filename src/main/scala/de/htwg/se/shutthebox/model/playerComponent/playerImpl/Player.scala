@@ -2,10 +2,9 @@ package de.htwg.se.shutthebox.model.playerComponent.playerImpl
 
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 
-class Player() extends playerInterface {
-  var plrName = ""
-  var score = 0
+case class Player(name: String, score: Int = 0) extends playerInterface {
 
+  /*
   def setName(index:Integer) : String = {
     plrName = "Player " + index
     plrName
@@ -14,5 +13,9 @@ class Player() extends playerInterface {
   def updateScore(n:Integer) : Integer = {
     score = n
     score
+  }*/
+  override def updateScore(newScore: Int): Player = {
+    val newPlayer = copy(this.name, newScore)
+    return newPlayer
   }
 }

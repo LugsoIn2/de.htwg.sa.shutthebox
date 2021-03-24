@@ -47,8 +47,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     createField(t)
     createPlayers(ai)
     resetMatchfield()
-    getPlayers(0).setName(1)   // problems with code coverage
-    getPlayers(1).setName(2)   // NullPointerException or infinite loop for input
+    //getPlayers(0).setName(1)   // problems with code coverage
+    //getPlayers(1).setName(2)   // NullPointerException or infinite loop for input
     //setCurrentPlayer()
     gameState=INGAME
   }
@@ -75,7 +75,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def createPlayers(ai:Boolean): Unit = {
     players(0) = injector.instance[playerInterface](Names.named("player1"))
     if (ai) {
-      players(1) = new AI(this)
+      //players(1) = new AI(this)
     }
     else {
       players(1) = injector.instance[playerInterface](Names.named("player2"))

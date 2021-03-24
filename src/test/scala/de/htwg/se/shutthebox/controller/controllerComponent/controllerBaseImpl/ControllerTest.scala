@@ -114,9 +114,9 @@ class ControllerTest extends WordSpec with Matchers {
       }
       "notify its Observer after creating players" in {
         controller.createPlayers(false) shouldBe a [BoxedUnit]
-        controller.players(0).plrName shouldBe a[String]
+        controller.players(0).name shouldBe a[String]
         controller.players(0).score shouldBe a[Integer]
-        controller.players(1).plrName shouldBe a[String]
+        controller.players(1).name shouldBe a[String]
         controller.players(1).score shouldBe a[Integer]
         //        observer.updated should be(true)
 

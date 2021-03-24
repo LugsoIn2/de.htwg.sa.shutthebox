@@ -44,7 +44,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     verticalTextPosition = Alignment.Center
     font = new Font("Courier New", 1, 20)
     foreground = Color.WHITE
-    text = controller.currentPlayer.plrName
+    text = controller.currentPlayer.name
   }
   var lbl_score_header:Label = new Label {
     icon = mainFrame.resizedTexture("textures" + File.separator + "SCORE.png", 274, 32)
@@ -204,7 +204,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
       }
     }
     lbl_message.text = ""
-    lbl_plr.text = controller.currentPlayer.plrName
+    lbl_plr.text = controller.currentPlayer.name
     lbl_score.text = controller.getScore.toString
     mainFrame.repaint()
   }
