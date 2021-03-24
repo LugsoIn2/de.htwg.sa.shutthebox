@@ -7,7 +7,7 @@ import com.google.inject.name.Names
 import de.htwg.se.shutthebox.ShutTheBoxModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.controller.controllerComponent._
-import de.htwg.se.shutthebox.model.playerComponent.aiBaseImpl.AI
+import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
 import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.{Die}
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface

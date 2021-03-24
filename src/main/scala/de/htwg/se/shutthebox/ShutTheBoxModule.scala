@@ -9,9 +9,9 @@ import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.fileIoComponent.fileIoXmlImpl.FileIO
-import de.htwg.se.shutthebox.model.playerComponent.aiBaseImpl.AI
+import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
 import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
-import de.htwg.se.shutthebox.model.playerComponent.{aiInterface, playerInterface}
+import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import net.codingwell.scalaguice.ScalaModule
 import de.htwg.se.shutthebox.model.fileIoComponent._
 
