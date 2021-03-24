@@ -97,7 +97,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     currentPlayerIndex += 1
 
     if (currentPlayerIndex < 2) {
-
       currentPlayer.updateScore(getScore)
       resetMatchfield()
 
@@ -112,6 +111,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       }
       publish(new CurrentPlayerSet)
     } else {
+      print(getScore)
       currentPlayer.updateScore(getScore)
       publish(new ShowScoreBoard)
     }
@@ -128,6 +128,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
         score -= i
       }
     }
+    print("getScore:" + score + "\n")
     publish(new ScoreUpdated)
     score
   }
