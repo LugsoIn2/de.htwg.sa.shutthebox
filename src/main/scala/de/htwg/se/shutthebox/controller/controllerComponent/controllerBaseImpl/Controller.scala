@@ -8,8 +8,8 @@ import de.htwg.se.shutthebox.ShutTheBoxModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.controller.controllerComponent._
 import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
-import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
-import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.{Die}
+import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
+import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Die
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
@@ -23,7 +23,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var currentPlayer:playerInterface = players(0)
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
-  var dice = Array(new Die, new Die)
+  //var dice = Array(new Die, new Die)
+  var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
 
@@ -65,7 +66,10 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def createDice(): Unit = {
-    dice = Array(new Die, new Die)
+    //dice = Array(new Die, new Die)
+    for (i <- 0 to 1) {
+      dice(i) = new Die()
+    }
     publish(new DiceCreated)
   }
 
@@ -134,7 +138,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def resetMatchfield() : Unit = {
     for (i <- 1 to matchfield.field.length) {
-      matchfield.field(i-1).isShut = false
+      matchfield.field(i-1) = matchfield.field(i-1).copy(isShut = false)
     }
   }
 
@@ -163,7 +167,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     if (lastShut.nonEmpty) {
       shutState = SHUTSTATE0
       gameState = UNDOSTATE
-      matchfield.field(lastShut.top - 1).isShut = false
+      matchfield.field(lastShut.top - 1) = matchfield.field(lastShut.top - 1).copy(isShut = false)
       tmpLastShut.push(lastShut.top)
       lastShut.pop()
     }
@@ -300,9 +304,9 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     lastShut.clear()
     tmpLastShut.clear()
     if (gameState == INGAME | gameState == SHUT){
-      dice(0).roll
+      dice(0) = dice(0).roll
       Thread.sleep(100)
-      dice(1).roll
+      dice(1) = dice(1).roll
       calcValidShuts()
       gameState=ROLLDICE
       shutState=SHUTSTATE0

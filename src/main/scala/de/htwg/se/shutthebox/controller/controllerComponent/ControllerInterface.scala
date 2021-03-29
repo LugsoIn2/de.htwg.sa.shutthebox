@@ -3,7 +3,7 @@ package de.htwg.se.shutthebox.controller.controllerComponent
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState.{GameState, MENU}
 import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{SHUTSTATE0, ShutState}
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Die
-import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
+import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
@@ -17,7 +17,7 @@ trait ControllerInterface extends Publisher {
   var currentPlayer:playerInterface
   var currentPlayerIndex : Int // to determine, when to show scoreboard
   var matchfield : fieldInterface
-  var dice : Array[Die]
+  var dice:Array[dieInterface]
  /* var gameState : GameState
   var shutState : ShutState
 

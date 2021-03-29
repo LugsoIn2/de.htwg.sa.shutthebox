@@ -30,7 +30,7 @@ class FileIO extends FileIOInterface {
     var count = 0
     for (feld <- jsonList) {
       if (feld.toString().contains("true")) {
-        field.field(count).isShut = true
+        field.field(count).copy(isShut = true)
       }
       count += 1
     }

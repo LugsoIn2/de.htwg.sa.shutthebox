@@ -3,15 +3,22 @@ package de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl
 import de.htwg.se.shutthebox.model.fieldComponent.dieInterface
 
 //Dice to roll
-class Die() extends dieInterface {
-  val start = 1
-  val end   = 6
-  var value = 1
+case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
 
-  def roll: Integer = {
-     value = start + scala.util.Random.nextInt((end - start) + 1)
-     value
+  /*
+  override def roll: Int = {
+    this.copy(value = (start + scala.util.Random.nextInt((end - start) + 1)))
+    print(this.value)
+    this.value
+  }*/
+
+
+  override def roll: dieInterface = {
+    val newDie = this.copy(value = start + scala.util.Random.nextInt(end - start) + 1)
+    print(newDie.value)
+    newDie
   }
+
 
   override def toString : String = {
     value match {
