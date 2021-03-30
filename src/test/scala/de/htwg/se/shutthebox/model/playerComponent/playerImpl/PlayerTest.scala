@@ -7,15 +7,6 @@ import org.scalatest._
 
 class PlayerTest extends WordSpec with Matchers {
 
-  /*
-  "A Player" should {
-    "a value" in {
-      player.name shouldBe a[String]
-      player.score shouldBe a [Int]
-      player.updateScore(1) shouldBe a [Player]
-    }
-  }*/
-
   "A Player" when {
     "not set to any value" should {
       val player = Player("")
