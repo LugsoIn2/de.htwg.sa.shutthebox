@@ -2,7 +2,7 @@ package de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState._
 import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{apply => _, _}
-import com.google.inject.{Guice, Inject}
+import com.google.inject.{Guice, Inject, Injector}
 import com.google.inject.name.Names
 import de.htwg.se.shutthebox.ShutTheBoxModule
 import net.codingwell.scalaguice.InjectorExtensions._
@@ -28,7 +28,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
 
-  var validNumber = Array(0,0)
+  var validNumber: Array[Int] = Array(0,0)
   var validSum = 0
   var validDiff = 0
   var validProd = 0
@@ -38,14 +38,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   private var lastShut = mutable.Stack[Int]()
   private var tmpLastShut = mutable.Stack[Int]()
 
-  val injector = Guice.createInjector(new ShutTheBoxModule)
-  val fileIo = injector.instance[FileIOInterface]
+  val injector: Injector = Guice.createInjector(new ShutTheBoxModule)
+  val fileIo: FileIOInterface = injector.instance[FileIOInterface]
 
 
   def startGame(t:Integer, ai:Boolean): Unit = {
     //t 0 = SmallField, t 1 = BigField
     //ai 0 = no AI, ai 1 = AI
     createField(t)
+    createDice()
     createPlayers(ai)
     resetMatchfield()
     //setCurrentPlayer()
@@ -68,7 +69,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def createDice(): Unit = {
     //dice = Array(new Die, new Die)
     for (i <- 0 to 1) {
-      dice(i) = new Die()
+      dice(i) = Die()
     }
     publish(new DiceCreated)
   }
@@ -347,7 +348,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
 
-  def update() : Unit = {
+  def update : Unit = {
     publish(new AIThink)
   }
 }

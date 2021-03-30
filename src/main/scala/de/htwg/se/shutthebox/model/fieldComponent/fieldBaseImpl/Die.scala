@@ -15,7 +15,6 @@ case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
 
   override def roll: dieInterface = {
     val newDie = this.copy(value = start + scala.util.Random.nextInt(end - start) + 1)
-    print(newDie.value)
     newDie
   }
 
