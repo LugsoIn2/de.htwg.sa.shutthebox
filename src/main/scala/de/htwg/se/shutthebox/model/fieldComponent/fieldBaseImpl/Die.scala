@@ -5,19 +5,10 @@ import de.htwg.se.shutthebox.model.fieldComponent.dieInterface
 //Dice to roll
 case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
 
-  /*
-  override def roll: Int = {
-    this.copy(value = (start + scala.util.Random.nextInt((end - start) + 1)))
-    print(this.value)
-    this.value
-  }*/
-
-
   override def roll: dieInterface = {
     val newDie = this.copy(value = start + scala.util.Random.nextInt(end - start) + 1)
     newDie
   }
-
 
   override def toString : String = {
     value match {

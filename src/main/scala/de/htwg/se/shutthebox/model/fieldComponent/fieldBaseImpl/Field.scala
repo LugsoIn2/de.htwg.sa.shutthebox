@@ -4,12 +4,6 @@ import de.htwg.se.shutthebox.model.fieldComponent.{cellInterface, fieldInterface
 
 // Field, which implements 9 cells in List
 case class Field(field:Array[Cell]) extends fieldInterface {
-  /*
-  override val field:Array[Cell] = Array.ofDim[Cell](9)
-  for (i <- 1 to 9) {
-    field(i - 1) = Cell(i)
-    //field(i - 1).value = i
-  }*/
 
   def this() = {
     this(Array.ofDim[Cell](9))

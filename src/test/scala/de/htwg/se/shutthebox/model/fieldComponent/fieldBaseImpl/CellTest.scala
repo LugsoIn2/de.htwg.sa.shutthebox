@@ -13,8 +13,8 @@ class CellTest extends WordSpec with Matchers {
         cell.isShut should be (false)
       }
     }
-    "is set with value 1 and isShut true" in {
-      val cell = Cell(1, isShut = true)
+    "is set with value 1 and isShut true" should {
+      val cell = Cell(isShut = true)
       "have value 1 and isShut true" in {
         cell.value should be (1)
         cell.isShut should be (true)
