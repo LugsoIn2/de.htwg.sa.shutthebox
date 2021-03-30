@@ -29,7 +29,7 @@ class PlayerTest extends WordSpec with Matchers {
         playerOne.score should be (20)
       }
       "if updatePlayer score to 10" in {
-        val playerScore = Player("Player1", 0)
+        val playerScore = Player("Player1")
         val updatePlayer = playerScore.updateScore(10)
         updatePlayer.score should be (10)
       }
