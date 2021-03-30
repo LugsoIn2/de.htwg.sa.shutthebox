@@ -74,6 +74,11 @@ class ControllerTest extends WordSpec with Matchers {
         controller.shut(11) shouldBe a [BoxedUnit]
         controller.shut(12) shouldBe a [BoxedUnit]
         controller.calcValidShuts() shouldBe a [BoxedUnit]
+        controller.add(5, 1) should be (6)
+        controller.sub(5, 1) should be (4)
+        controller.div(4, 2) should be (2)
+        controller.mult(2,2) should be (4)
+        controller.calcDice(controller.add) should be (2)
         //controller.calcSum shouldBe a [Integer]
         //controller.calcDiff shouldBe a [Integer]
         //controller.calcProd shouldBe a [Integer]
