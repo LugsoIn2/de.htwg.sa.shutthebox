@@ -49,17 +49,23 @@ trait ControllerInterface extends Publisher {
   def doShut(i:Int) : String
   def shut(i:Int) : Unit
   def calcValidShuts() : Unit
-  def calcSum : Integer
-  def calcDiff : Integer
-  def calcProd : Integer
-  def calcDiv : Integer
+  def calcDice: ((Int, Int) => Int) => Int
+  def calc(op:(Int, Int)=> Int) (x:Int, y:Int): Int
+  def add(x:Int, y:Int) : Int
+  def sub(x:Int, y:Int) : Int
+  def mult(x:Int, y:Int) : Int
+  def div(x:Int, y:Int) : Int
+  //def calcSum : Integer
+  //def calcDiff : Integer
+  //def calcProd : Integer
+  //def calcDiv : Integer
   def rollDice : String
   def printOutput : String
   def fieldToString : String
   def rollToString : String
-  def load: Unit
-  def save:Unit
-  def update:Unit
+  def load(): Unit
+  def save():Unit
+  def update():Unit
 }
 
 import scala.swing.event.Event

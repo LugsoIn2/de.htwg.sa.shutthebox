@@ -231,22 +231,37 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //Aufruf der regeln methode.
     //Soll in validNumber dann die erlaubten Zahlen schreiben
     // 1, 3
-    if (!matchfield.field(dice(0).value-1).isShut && !matchfield.field(dice(1).value-1).isShut) {
+    if (!matchfield.field(dice(0).value - 1).isShut && !matchfield.field(dice(1).value - 1).isShut) {
       validNumber(0) = dice(0).value
       validNumber(1) = dice(1).value
     } else {
       validNumber(0) = 0
       validNumber(1) = 0
     }
-    validSum = calcSum
-    validProd = calcProd
-    validDiff = calcDiff
-    validDiv = calcDiv
-
-
-
+    validSum = calcDice(add)
+    validProd = calcDice(mult)
+    validDiff = calcDice(sub)
+    validDiv = calcDice(div)
   }
 
+  def calcDice: ((Int, Int) => Int) => Int = calc(_)(dice(0).value, dice(1).value)
+  def calc(op:(Int, Int)=> Int) (x:Int, y:Int): Int = {
+    op(x,y)
+  }
+  def add(x:Int, y:Int): Int = x + y
+  def sub(x:Int, y:Int): Int = {
+    if ((x - y) > 0) {
+      y-x
+    } else x-y
+  }
+  def mult(x:Int, y:Int): Int = x * y
+  def div(x:Int, y:Int): Int = {
+    if (x>=y) {
+      x/y
+    } else y/x
+  }
+
+  /*
   def calcSum : Integer = {
     var res = 0
     var i = dice(0).value
@@ -298,7 +313,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       res = 1
     }
     res
-  }
+  }*/
 
   def rollDice : String = {
     var message = " "
@@ -335,20 +350,20 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     dice(0).toString + dice(1).toString
   }
 
-  def save:Unit = {
+  def save():Unit = {
     fileIo.save(matchfield)
     //gameState = LOADED
     publish(new CellShut)
   }
 
-  def load:Unit = {
+  def load():Unit = {
     matchfield = fileIo.load
     publish(new GameLoaded)
     publish(new CellShut)
   }
 
 
-  def update : Unit = {
+  def update() : Unit = {
     publish(new AIThink)
   }
 }
