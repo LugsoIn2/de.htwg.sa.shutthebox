@@ -245,9 +245,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def calcDice: ((Int, Int) => Int) => Int = calc(_)(dice(0).value, dice(1).value)
+
   def calc(op:(Int, Int)=> Int) (x:Int, y:Int): Int = {
     op(x,y)
   }
+
   def add(x:Int, y:Int): Int = x + y
   def sub(x:Int, y:Int): Int = {
     if ((x - y) > 0) {
