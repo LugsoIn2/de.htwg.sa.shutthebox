@@ -30,7 +30,7 @@ class IngamePanelTest extends WordSpec with Matchers {
       ingamepnl.controller shouldBe a [ControllerInterface]
       ingamepnl.lbl_plr shouldBe a [Label]
 
-      ingamepnl.nextPlayer shouldBe a [BoxedUnit]
+      //ingamepnl.nextPlayer shouldBe a [BoxedUnit]
       ingamepnl.updateMatchfield() shouldBe a [BoxedUnit]
       ingamepnl.textures shouldBe a [Array[_]]
       ingamepnl.diceTextures shouldBe a [Array[_]]
