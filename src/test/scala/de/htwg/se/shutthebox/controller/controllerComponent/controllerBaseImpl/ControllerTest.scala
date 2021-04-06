@@ -8,6 +8,7 @@ import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
 import org.scalatest._
 
 import scala.runtime.BoxedUnit
+import scala.util.{Failure, Success, Try}
 
 class ControllerTest extends WordSpec with Matchers {
   "A Controller" when {
@@ -49,7 +50,55 @@ class ControllerTest extends WordSpec with Matchers {
         controller.cmdRedoShut() shouldBe a [BoxedUnit]
         controller.redoShut() shouldBe a [BoxedUnit]
         controller.undoShut() shouldBe a [BoxedUnit]
-        controller.doShut(1) shouldBe a [String]
+        controller.doShut(1) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(2) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(3) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(4) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(5) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(6) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(7) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(8) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(9) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(10) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(11) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        controller.doShut(12) match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        /*controller.doShut(1) shouldBe a [String]
         controller.doShut(2) shouldBe a [String]
         controller.doShut(3) shouldBe a [String]
         controller.doShut(4) shouldBe a [String]
@@ -60,7 +109,7 @@ class ControllerTest extends WordSpec with Matchers {
         controller.doShut(9) shouldBe a [String]
         controller.doShut(10) shouldBe a [String]
         controller.doShut(11) shouldBe a [String]
-        controller.doShut(12) shouldBe a [String]
+        controller.doShut(12) shouldBe a [String]*/
         controller.shut(1) shouldBe a [BoxedUnit]
         controller.shut(2) shouldBe a [BoxedUnit]
         controller.shut(3) shouldBe a [BoxedUnit]
