@@ -23,7 +23,7 @@ class TUITest extends WordSpec with Matchers {
     "a value" in {
       tui shouldBe a [TUI]
       tui.printHeader() shouldBe a [String]
-      tui.nextPlayer() shouldBe a [BoxedUnit]
+      //tui.nextPlayer() shouldBe a [BoxedUnit]
       tui.printStartGame() shouldBe a [String]
       tui.printScoreBoard() shouldBe a [String]
       tui.printRules() shouldBe a [String]
