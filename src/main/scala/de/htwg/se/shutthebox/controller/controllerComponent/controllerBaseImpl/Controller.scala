@@ -80,7 +80,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def createPlayers(ai:Boolean): Unit = {
     players(0) = injector.instance[playerInterface](Names.named("player1"))
     if (ai) {
-      //players(1) = new AI(this)
+      players(1) = new AI(this)
     } else {
       players(1) = injector.instance[playerInterface](Names.named("player2"))
     }
@@ -103,8 +103,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def setCurrentPlayer(): Unit = {
     currentPlayerIndex += 1
     if (currentPlayerIndex < 2) {
-      players(currentPlayerIndex - 1) = currentPlayer.updateScore(getScore)
-      print(players(currentPlayerIndex - 1))
+      //players(currentPlayerIndex - 1) = currentPlayer.updateScore(getScore)
+      //print(players(currentPlayerIndex - 1))
+      if (currentPlayer == players(0)){
+        currentPlayer = currentPlayer.updateScore(getScore)
+        players(0) = currentPlayer
+      } else {
+        currentPlayer = currentPlayer.updateScore(getScore)
+        players(1) = currentPlayer
+      }
       resetMatchfield()
 
       if (currentPlayer == players(0)) {
@@ -118,8 +125,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       }
       publish(new CurrentPlayerSet)
     } else {
-      currentPlayer = players(currentPlayerIndex - 1)
-      players(currentPlayerIndex - 1 ) = currentPlayer.updateScore(getScore)
+      //currentPlayer = players(currentPlayerIndex - 1)
+      //players(currentPlayerIndex - 1 ) = currentPlayer.updateScore(getScore)
+      if (currentPlayer == players(0)){
+        currentPlayer = currentPlayer.updateScore(getScore)
+        players(0) = currentPlayer
+      } else {
+        currentPlayer = currentPlayer.updateScore(getScore)
+        players(1) = currentPlayer
+      }
       publish(new ShowScoreBoard)
     }
     gameState = INGAME

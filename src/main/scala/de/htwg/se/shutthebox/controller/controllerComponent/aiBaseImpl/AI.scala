@@ -4,12 +4,14 @@ import de.htwg.se.shutthebox.ShutTheBox
 import de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.shutthebox.controller.controllerComponent.aiInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
+import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 
 import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.Future
 import scala.swing.{Frame, Swing}
+import scala.util.{Failure, Success}
 
-class AI(controller:Controller) extends aiInterface {
+class AI(controller:Controller) extends Player("AI") with aiInterface {
 
   //var gui:Frame = ShutTheBox.gui
   var validShuts:Array[Int] = Array.ofDim[Int](4)
@@ -40,11 +42,14 @@ class AI(controller:Controller) extends aiInterface {
       var currentMax = validShuts.max
       var currentMaxIndex = validShuts.indexOf(validShuts.max)
 
-     // if maximum is in range of matchfield
+      // if maximum is in range of matchfield
       if (currentMax > 0 && currentMax <= controller.matchfield.field.length ) {
         // if the cell isn't already shut
         if (!controller.matchfield.field(currentMax-1).isShut) {
-          controller.doShut(validShuts.max)
+          controller.doShut(validShuts.max) match {
+            case Success(value) => ""
+            case Failure(exception) => exception.getMessage
+          }
           think()
         } else {
           validShuts(currentMaxIndex) = 0
@@ -53,9 +58,15 @@ class AI(controller:Controller) extends aiInterface {
             // if the two single dice values aren't already shut
             if ((singleShuts(0) != singleShuts(1)) & !controller.matchfield.field(singleShuts(0) - 1).isShut && !controller.matchfield.field(singleShuts(1) - 1).isShut) {
               // shut the single die values
-              controller.doShut(singleShuts(0))
+              controller.doShut(singleShuts(0)) match {
+                case Success(value) => ""
+                case Failure(exception) => exception.getMessage
+              }
               Thread.sleep(700) // so human player can follow along
-              controller.doShut(singleShuts(1))
+              controller.doShut(singleShuts(1)) match {
+                case Success(value) => ""
+                case Failure(exception) => exception.getMessage
+              }
               think()
             }
 
@@ -74,13 +85,16 @@ class AI(controller:Controller) extends aiInterface {
 
   analyze onComplete {
     result => controller.update()//Swing.onEDT //{
-      //gui.repaint()
+    //gui.repaint()
     //}
   }
 
   def think(): Unit = {
     //gui.repaint()
-    controller.rollDice
+    controller.rollDice match {
+      case Success(value) => ""
+      case Failure(exception) => exception.getMessage
+    }
     Thread.sleep(randomTimeMillis(500, 2000))
     calcValidShuts()
     allowFuture = true
