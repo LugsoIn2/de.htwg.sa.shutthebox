@@ -260,8 +260,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def add(x:Int, y:Int): Int = x + y
   def sub(x:Int, y:Int): Int = {
     if ((x - y) > 0) {
-      y-x
-    } else x-y
+      x-y
+    } else y-x
   }
   def mult(x:Int, y:Int): Int = x * y
   def div(x:Int, y:Int): Int = {
