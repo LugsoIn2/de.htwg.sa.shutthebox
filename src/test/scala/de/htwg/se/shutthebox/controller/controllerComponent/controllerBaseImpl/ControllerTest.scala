@@ -132,7 +132,11 @@ class ControllerTest extends WordSpec with Matchers {
         //controller.calcDiff shouldBe a [Integer]
         //controller.calcProd shouldBe a [Integer]
         //controller.calcDiv shouldBe a [Integer]
-        controller.rollDice shouldBe a [String]
+        controller.rollDice match {
+          case Success(value) => value shouldBe a [String]
+          case Failure(exception) => exception.getMessage should startWith("")
+        }
+        //controller.rollDice shouldBe a [String]
         controller.printOutput shouldBe a [String]
         controller.fieldToString shouldBe a [String]
         controller.rollToString shouldBe a [String]

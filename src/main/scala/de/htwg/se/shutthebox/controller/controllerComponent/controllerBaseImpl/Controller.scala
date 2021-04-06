@@ -324,7 +324,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     res
   }*/
 
-  def rollDice : String = {
+  def rollDice : Try[String] = {
     var message = " "
     lastShut.clear()
     tmpLastShut.clear()
@@ -340,7 +340,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       message = "Dice roll not allowed!"
       println(message)
     }
-    message
+    Try(message)
   }
 
   def printOutput : String = {

@@ -10,6 +10,8 @@ import de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl.BigField
 
 import scala.swing.Reactor
 
+import scala.util.{Failure, Success}
+
 //class TUI(field:Field, players:Array[Player], currentPlr:Player) {
 class TUI(controller:ControllerInterface) extends Reactor {
   listenTo(controller)
@@ -34,7 +36,13 @@ class TUI(controller:ControllerInterface) extends Reactor {
         case "y" => controller.cmdRedoShut() // Redo
 
         case "q" => System.exit(0)
-        case "r" => controller.rollDice
+        //case "r" => controller.rollDice
+        case "r" => {
+          controller.rollDice match {
+            case Success(value) => ""
+            case Failure(exception) => exception.getMessage
+          }
+        }
         case "n" => nextPlayer()
         case "h" => print(printRules())
         case "1" => controller.cmdShut(1)

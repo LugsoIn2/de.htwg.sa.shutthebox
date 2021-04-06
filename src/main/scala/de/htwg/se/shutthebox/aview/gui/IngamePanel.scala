@@ -348,7 +348,11 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
 
   reactions += {
     case ButtonClicked(b) if b == btn_roll =>
-      lbl_message.text = controller.rollDice
+      controller.rollDice match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.rollDice
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == btn_undo =>
