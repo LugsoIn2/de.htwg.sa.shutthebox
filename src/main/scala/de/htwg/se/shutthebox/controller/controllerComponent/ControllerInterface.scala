@@ -10,6 +10,7 @@ import de.htwg.se.shutthebox.util.UndoManager
 
 import scala.collection.mutable
 import scala.swing.Publisher
+import scala.util.{Failure, Success, Try}
 
 trait ControllerInterface extends Publisher {
 
@@ -46,7 +47,7 @@ trait ControllerInterface extends Publisher {
   def cmdRedoShut() : Unit
   def redoShut() : Unit
   def undoShut() : Unit
-  def doShut(i:Int) : String
+  def doShut(i:Int) : Try[String]
   def shut(i:Int) : Unit
   def calcValidShuts() : Unit
   def calcDice: ((Int, Int) => Int) => Int

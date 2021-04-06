@@ -9,6 +9,7 @@ import de.htwg.se.shutthebox.controller.controllerComponent._
 import de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl.Controller
 import javax.swing.border.EmptyBorder
 import javax.swing.{BorderFactory, ImageIcon}
+import scala.util.{Failure, Success, Try}
 
 
 class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
@@ -249,51 +250,99 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
 
   reactions += {
     case ButtonClicked(b) if b == numButtons(0) =>
-      lbl_message.text = controller.doShut(1)
+      controller.doShut(1) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(1)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(1) =>
-      lbl_message.text = controller.doShut(2)
+      controller.doShut(2) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(2)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(2) =>
-      lbl_message.text = controller.doShut(3)
+      controller.doShut(3) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(3)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(3) =>
-      lbl_message.text = controller.doShut(4)
+      controller.doShut(4) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(4)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(4) =>
-      lbl_message.text = controller.doShut(5)
+      controller.doShut(5) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(5)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(5) =>
-      lbl_message.text = controller.doShut(6)
+      controller.doShut(6) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(6)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(6) =>
-      lbl_message.text = controller.doShut(7)
+      controller.doShut(7) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(7)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(7) =>
-      lbl_message.text = controller.doShut(8)
+      controller.doShut(8) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(8)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(8) =>
-      lbl_message.text = controller.doShut(9)
+      controller.doShut(9) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(9)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(9) =>
-      lbl_message.text = controller.doShut(10)
+      controller.doShut(10) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(10)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(10) =>
-      lbl_message.text = controller.doShut(11)
+      controller.doShut(11) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(11)
       mainFrame.repaint()
 
     case ButtonClicked(b) if b == numButtons(11) =>
-      lbl_message.text = controller.doShut(12)
+      controller.doShut(12) match {
+        case Success(value) => lbl_message.text = value
+        case Failure(exception) => exception.getMessage
+      }
+      //lbl_message.text = controller.doShut(12)
       mainFrame.repaint()
   }
 

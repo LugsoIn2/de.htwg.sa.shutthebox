@@ -17,6 +17,8 @@ import de.htwg.se.shutthebox.util.UndoManager
 import scala.collection.mutable
 import scala.swing.Publisher
 
+import scala.util.{Failure, Success, Try}
+
 
 class Controller @Inject() extends ControllerInterface with Publisher {
   var players:Array[playerInterface] = Array.ofDim[playerInterface](2)
@@ -158,7 +160,12 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def redoShut(): Unit = {
     if (tmpLastShut.nonEmpty) {
-      doShut(tmpLastShut.top)
+
+      doShut(tmpLastShut.top) match {
+        case Success(value) => ""
+        case Failure(exception) => exception.getMessage
+      }
+      //doShut(tmpLastShut.top)
       tmpLastShut.pop()
     }
     publish(new Redone)
@@ -174,7 +181,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     }
     publish(new Undone)
   }
-  def doShut(i:Int) : String = {
+  def doShut(i:Int) : Try[String] = {
     var message = " "
     if (gameState == ROLLDICE | gameState == SHUT | gameState == UNDOSTATE) {
 
@@ -205,7 +212,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       message = "Please roll the dice first!"
       println(message)
     }
-    message
+    Try(message)
   }
 
 
