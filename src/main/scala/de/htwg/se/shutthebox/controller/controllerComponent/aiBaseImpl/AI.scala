@@ -92,9 +92,10 @@ class AI(controller:Controller) extends Player("AI") with aiInterface {
   def think(): Unit = {
     //gui.repaint()
     controller.rollDice match {
-      case Success(value) => ""
-      case Failure(exception) => exception.getMessage
+      case Some(value) => ""
+      case None  => ""
     }
+
     Thread.sleep(randomTimeMillis(500, 2000))
     calcValidShuts()
     allowFuture = true

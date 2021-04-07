@@ -284,8 +284,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     } else y/x
   }
 
-  def rollDice : Try[String] = {
-    var message = " "
+  def rollDice : Option[String] = {
+    var message = ""
     lastShut.clear()
     tmpLastShut.clear()
     if (gameState == INGAME | gameState == SHUT){
@@ -300,7 +300,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       message = "Dice roll not allowed!"
       println(message)
     }
-    Try(message)
+    if (!message.isEmpty) {
+      Some(message)
+    }else {
+      None
+    }
   }
 
   def printOutput : String = {

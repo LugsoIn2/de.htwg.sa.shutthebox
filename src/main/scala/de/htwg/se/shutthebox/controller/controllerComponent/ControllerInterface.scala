@@ -60,7 +60,7 @@ trait ControllerInterface extends Publisher {
   //def calcDiff : Integer
   //def calcProd : Integer
   //def calcDiv : Integer
-  def rollDice : Try[String]
+  def rollDice : Option[String]
   def printOutput : String
   def fieldToString : String
   def rollToString : String

@@ -252,7 +252,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(0) =>
       controller.doShut(1) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(1)
       mainFrame.repaint()
@@ -260,7 +260,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(1) =>
       controller.doShut(2) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(2)
       mainFrame.repaint()
@@ -268,7 +268,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(2) =>
       controller.doShut(3) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(3)
       mainFrame.repaint()
@@ -276,7 +276,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(3) =>
       controller.doShut(4) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(4)
       mainFrame.repaint()
@@ -284,7 +284,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(4) =>
       controller.doShut(5) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(5)
       mainFrame.repaint()
@@ -292,7 +292,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(5) =>
       controller.doShut(6) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(6)
       mainFrame.repaint()
@@ -300,7 +300,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(6) =>
       controller.doShut(7) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(7)
       mainFrame.repaint()
@@ -308,7 +308,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(7) =>
       controller.doShut(8) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(8)
       mainFrame.repaint()
@@ -316,7 +316,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(8) =>
       controller.doShut(9) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(9)
       mainFrame.repaint()
@@ -324,7 +324,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(9) =>
       controller.doShut(10) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(10)
       mainFrame.repaint()
@@ -332,7 +332,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(10) =>
       controller.doShut(11) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(11)
       mainFrame.repaint()
@@ -340,7 +340,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
     case ButtonClicked(b) if b == numButtons(11) =>
       controller.doShut(12) match {
         case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Failure(exception) => lbl_message.text = exception.getMessage
       }
       //lbl_message.text = controller.doShut(12)
       mainFrame.repaint()
@@ -349,9 +349,10 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
   reactions += {
     case ButtonClicked(b) if b == btn_roll =>
       controller.rollDice match {
-        case Success(value) => lbl_message.text = value
-        case Failure(exception) => exception.getMessage
+        case Some(value) => lbl_message.text = value
+        case None => ""
       }
+
       //lbl_message.text = controller.rollDice
       mainFrame.repaint()
 

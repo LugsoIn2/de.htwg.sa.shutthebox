@@ -39,8 +39,8 @@ class TUI(controller:ControllerInterface) extends Reactor {
         //case "r" => controller.rollDice
         case "r" => {
           controller.rollDice match {
-            case Success(value) => ""
-            case Failure(exception) => exception.getMessage
+            case Some(value) => println(value)
+            case None => ""
           }
         }
         case "n" => nextPlayer()
