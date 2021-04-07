@@ -284,60 +284,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     } else y/x
   }
 
-  /*
-  def calcSum : Integer = {
-    var res = 0
-    var i = dice(0).value
-    var j = dice(1).value
-
-    res = i + j
-
-    //if (res <=0 | res > matchfield.field.size)
-    //  res = 0
-    res
-  }
-
-  def calcDiff : Integer = {
-    var res = 0
-    var i = dice(0).value
-    var j = dice(1).value
-
-    if (i > j) {
-      res = i - j
-    } else if (i < j) {
-      res = j - i
-    }
-    //if (res <=0 | res > matchfield.field.size)
-    //  res = 0
-    res
-  }
-
-  def calcProd : Integer = {
-    var res = 0
-    var i = dice(0).value
-    var j = dice(1).value
-
-    res = i * j
-    //if (res <= 0 | res > matchfield.field.size)
-    //  res = 0
-    res
-  }
-
-  def calcDiv : Integer = {
-    var res = 0
-    var i = dice(0).value
-    var j = dice(1).value
-
-    if (i > j) {
-      res = i / j
-    } else if (i < j) {
-      res = j / i
-    } else if (i == j) {
-      res = 1
-    }
-    res
-  }*/
-
   def rollDice : Try[String] = {
     var message = " "
     lastShut.clear()
