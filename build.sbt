@@ -1,3 +1,6 @@
+lazy val root = (project in file(".")).aggregate(fileio)
+lazy val fileio = project in file("FileIO")
+
 name := "de.htwg.se.shutthebox"
 
 version := "1.0"
