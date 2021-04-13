@@ -1,4 +1,4 @@
-name := "de.htwg.se.shutthebox"
+name := "de.htwg.se.shutthebox-fileIO"
 
 version := "1.0"
 
