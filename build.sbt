@@ -10,6 +10,7 @@ lazy val rootProject = (project in file(".")).settings(
   libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.6",
   libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
   libraryDependencies += "com.typesafe.play" %% "play-json" % "2.7.1",
-).dependsOn(FileIO)
+).dependsOn(FileIO, Field)
 
-lazy val FileIO = (project in file("FileIO"))
+lazy val FileIO = project in file("FileIO")
+lazy val Field = project in file("Field")

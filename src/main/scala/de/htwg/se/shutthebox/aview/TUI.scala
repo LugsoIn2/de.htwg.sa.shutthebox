@@ -5,11 +5,9 @@ import de.htwg.se.shutthebox.util.Observer
 import de.htwg.se.shutthebox.controller._
 import de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.shutthebox.controller.controllerComponent._
-import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Die
 import de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl.BigField
 
 import scala.swing.Reactor
-
 import scala.util.{Failure, Success}
 
 //class TUI(field:Field, players:Array[Player], currentPlr:Player) {

@@ -8,15 +8,14 @@ import de.htwg.se.shutthebox.ShutTheBoxModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.controller.controllerComponent._
 import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
-import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Die
+import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
 
 import scala.collection.mutable
 import scala.swing.Publisher
-
 import scala.util.{Failure, Success, Try}
 
 

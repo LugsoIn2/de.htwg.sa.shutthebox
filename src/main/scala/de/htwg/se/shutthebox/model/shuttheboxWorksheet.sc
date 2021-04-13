@@ -1,4 +1,4 @@
-import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Cell
+
 
 case class Field()
 

@@ -1,9 +1,9 @@
 package de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl
 
-import de.htwg.se.shutthebox.util.UndoManager
 import de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl.BigField
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.{Die, Field}
 import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
+import de.htwg.se.shutthebox.util.UndoManager
 import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
 import org.scalatest._
 

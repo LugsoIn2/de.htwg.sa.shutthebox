@@ -4,11 +4,11 @@ import com.google.inject.Guice
 import com.google.inject.name.Names
 import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.ShutTheBoxModule
-import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
+import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import play.api.libs.json.{JsNumber, JsValue, Json}
-import scala.xml._
 
+import scala.xml._
 import scala.io.Source
 import scala.xml.{NodeSeq, PrettyPrinter}
 

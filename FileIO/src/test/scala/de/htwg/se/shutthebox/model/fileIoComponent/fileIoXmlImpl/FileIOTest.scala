@@ -1,7 +1,6 @@
 package de.htwg.se.shutthebox.model.fileIoComponent.fileIoXmlImpl
 
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Field
-import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
 import org.scalatest.{Matchers, WordSpec}
 import play.api.libs.json.JsObject
 
