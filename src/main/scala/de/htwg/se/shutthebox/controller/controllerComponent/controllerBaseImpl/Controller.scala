@@ -1,5 +1,7 @@
 package de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl
 
+import akka.actor.ActorSystem
+import akka.actor.typed.scaladsl.Behaviors
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState._
 import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{apply => _, _}
 import com.google.inject.{Guice, Inject, Injector}
@@ -13,6 +15,7 @@ import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
+import play.api.libs.json.Json
 
 import scala.collection.mutable
 import scala.swing.Publisher
@@ -333,7 +336,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     publish(new GameLoaded)
     publish(new CellShut)
   }
-
 
   def update() : Unit = {
     publish(new AIThink)

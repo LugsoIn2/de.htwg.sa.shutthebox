@@ -1,6 +1,7 @@
 package de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl
 
 import de.htwg.se.shutthebox.model.fieldComponent.dieInterface
+import play.api.libs.json.{JsValue, Json}
 
 //Dice to roll
 case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
@@ -10,7 +11,7 @@ case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
     newDie
   }
 
-  override def toString : String = {
+  override def toString: String = {
     value match {
       case 1 =>
         """

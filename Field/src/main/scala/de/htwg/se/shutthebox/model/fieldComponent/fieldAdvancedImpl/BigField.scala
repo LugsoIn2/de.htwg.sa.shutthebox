@@ -2,6 +2,7 @@ package de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl
 
 import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Cell
 import de.htwg.se.shutthebox.model.fieldComponent.{cellInterface, fieldInterface}
+import play.api.libs.json.{JsValue, Json}
 
 case class BigField(field:Array[Cell]) extends fieldInterface {
 
@@ -19,7 +20,6 @@ case class BigField(field:Array[Cell]) extends fieldInterface {
     }
     field.field(number-1)
   }
-
 
   override def toString : String = {
     var output = ""
@@ -43,5 +43,4 @@ case class BigField(field:Array[Cell]) extends fieldInterface {
 
     output
   }
-
 }

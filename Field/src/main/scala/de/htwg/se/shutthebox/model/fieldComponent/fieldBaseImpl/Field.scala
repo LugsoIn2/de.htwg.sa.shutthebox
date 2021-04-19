@@ -1,6 +1,7 @@
 package de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl
 
 import de.htwg.se.shutthebox.model.fieldComponent.{cellInterface, fieldInterface}
+import play.api.libs.json.{JsValue, Json}
 
 // Field, which implements 9 cells in List
 case class Field(field:Array[Cell]) extends fieldInterface {
