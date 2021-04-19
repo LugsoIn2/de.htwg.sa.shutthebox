@@ -1,7 +1,11 @@
 package de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl
 
-import akka.actor.ActorSystem
+import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.client.RequestBuilding.Post
+import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
+import akka.http.scaladsl.unmarshalling.Unmarshal
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState._
 import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{apply => _, _}
 import com.google.inject.{Guice, Inject, Injector}
@@ -18,6 +22,7 @@ import de.htwg.se.shutthebox.util.UndoManager
 import play.api.libs.json.Json
 
 import scala.collection.mutable
+import scala.concurrent.Future
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
 
@@ -27,7 +32,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var currentPlayer:playerInterface = players(0)
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
-  //var dice = Array(new Die, new Die)
+  var field = ArrayBuffer[Boolean]()
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0

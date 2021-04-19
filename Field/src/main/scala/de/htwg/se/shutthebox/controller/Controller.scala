@@ -64,7 +64,7 @@ class Controller {
       field = field :+ this.matchfield.field(i).isShut
     }
     val json: JsValue = Json.parse("""
-      "field" : """ + field + """,
+      "field" : """ + Json.toJson(field) + """,
       "dice" : {
           "die1" : """ + dice(0).value + """,
           "die2" : """ + dice(1).value + """

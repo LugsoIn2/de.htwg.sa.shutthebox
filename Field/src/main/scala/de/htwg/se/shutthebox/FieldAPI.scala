@@ -5,9 +5,6 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.PathMatchers
-import akka.stream
-import akka.stream.{ActorMaterializer, Materializer}
 import de.htwg.se.shutthebox.controller.Controller
 import play.api.libs.json.{JsObject, JsValue, Json}
 
@@ -28,7 +25,7 @@ object FieldAPI {
       pathPrefix("field") {
         concat(
           get {
-            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson))
+            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
           }, post {
             entity(as[String]) { jsonString => {
               println(jsonString)
@@ -40,7 +37,7 @@ object FieldAPI {
                 controller.createField(9)
               }
               controller.createDice()
-              complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson))
+              complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
               }
             }
             }
@@ -49,7 +46,7 @@ object FieldAPI {
       pathPrefix("rollDice") {
         get {
           controller.rollDice
-          complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson))
+          complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
         }
       },
       pathPrefix("shut") {
@@ -59,7 +56,7 @@ object FieldAPI {
             val json = Json.parse(jsonString)
             val index = (json \ "index").as[Int]
             controller.shut(index)
-            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson))
+            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
           }}
         }
       },
