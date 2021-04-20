@@ -25,7 +25,7 @@ object FieldAPI {
       pathPrefix("field") {
         concat(
           get {
-            complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, controller.toString))
+            complete(HttpEntity(ContentTypes.`application/json`, controller.toString))
           }, post {
             entity(as[String]) { jsonString => {
               println(jsonString)

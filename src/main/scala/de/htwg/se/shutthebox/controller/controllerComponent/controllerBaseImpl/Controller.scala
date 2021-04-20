@@ -289,7 +289,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //Aufruf der regeln methode.
     //Soll in validNumber dann die erlaubten Zahlen schreiben
     // 1, 3
-    getCall("field")
     if (!field(dice(0) - 1) && !field(dice(1) - 1)) {
       validNumber(0) = dice(0)
       validNumber(1) = dice(1)
@@ -329,7 +328,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     if (gameState == INGAME | gameState == SHUT){
       //dice(0) = dice(0).roll
       getCall("rollDice")
-      Thread.sleep(100)
+      Thread.sleep(500)
       //dice(1) = dice(1).roll
       println("rolldice: " + dice(0), dice(1))
       calcValidShuts()
