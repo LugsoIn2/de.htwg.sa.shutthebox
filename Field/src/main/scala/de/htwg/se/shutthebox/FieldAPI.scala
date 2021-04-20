@@ -76,6 +76,7 @@ object FieldAPI {
             val json = Json.parse(jsonString)
             val field = (json \ "field").as[Array[Boolean]]
             controller.loadFileIO(field)
+            Thread.sleep(500)
             complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
           }
           }

@@ -20,6 +20,7 @@ class FileIOController {
 
   val injector = Guice.createInjector(new FileIOModule)
   val fileIO = injector.instance[FileIOInterface]
+  var postBody = ""
 
   def save():Unit = {
     getCall("field")
@@ -29,17 +30,17 @@ class FileIOController {
     //var matchfield =
     //matchfield = fileIO.load
     val payload = fileIO.load
-    val body = postCall(payload.as[JsObject], "loadFileIO")
-    Thread.sleep(200)
-    body
+    postCall(payload.as[JsObject], "loadFileIO")
+    Thread.sleep(1000)
+    println("Postbuddy in load: " + postBody)
+    postBody
     //response zurück an Main Coontroller
   }
 
 
-  def postCall(payload: JsObject, requestURL: String) : String = {
+  def postCall(payload: JsObject, requestURL: String) : Unit = {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    var ret : String = ""
     val responseFuture: Future[HttpResponse] =
       Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
     responseFuture.onComplete{
@@ -50,11 +51,10 @@ class FileIOController {
             case Success(body) =>
               val JsonRes = Json.parse(body)
               println("post: " + body)
-              ret = body
+              postBody = body
           }
         }
     }
-    ret
   }
 
   def getCall(requestURL: String) : Unit = {

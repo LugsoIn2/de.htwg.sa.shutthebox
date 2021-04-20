@@ -354,7 +354,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       "load" -> true
     )
     postCall(payload, urlfileiomodule, "load")
-    Thread.sleep(500)
+    Thread.sleep(2000)
     publish(new GameLoaded)
     publish(new CellShut)
   }

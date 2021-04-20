@@ -28,6 +28,7 @@ object FileIOAPI {
             entity(as[String]) { jsonString => {
               println(jsonString)
               val body = FileIOController.load
+              println("Boddy: " + body)
               complete(HttpEntity(ContentTypes.`application/json`, body))
             }
             }

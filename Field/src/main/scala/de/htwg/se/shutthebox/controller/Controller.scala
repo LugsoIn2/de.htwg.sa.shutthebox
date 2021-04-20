@@ -49,7 +49,11 @@ class Controller {
   }
 
   def loadFileIO(field : Array[Boolean]) : Unit = {
-    createField(field.length)
+    if (field.length == 9) {
+      createField(0)
+    } else {
+      createField(1)
+    }
     shutCells(field)
   }
 
