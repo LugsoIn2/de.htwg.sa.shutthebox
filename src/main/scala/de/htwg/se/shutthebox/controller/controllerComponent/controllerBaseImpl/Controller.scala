@@ -204,7 +204,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     if (lastShut.nonEmpty) {
       shutState = SHUTSTATE0
       gameState = UNDOSTATE
-      matchfield.field(lastShut.top - 1) = matchfield.field(lastShut.top - 1).copy(isShut = false)
+      field(lastShut.top - 1) = false
       tmpLastShut.push(lastShut.top)
       lastShut.pop()
     }
