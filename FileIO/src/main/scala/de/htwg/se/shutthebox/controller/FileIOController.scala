@@ -30,6 +30,7 @@ class FileIOController {
     //matchfield = fileIO.load
     val payload = fileIO.load
     val body = postCall(payload.as[JsObject], "loadFileIO")
+    Thread.sleep(200)
     body
     //response zurück an Main Coontroller
   }

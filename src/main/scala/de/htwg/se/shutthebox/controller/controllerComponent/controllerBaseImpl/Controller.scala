@@ -344,24 +344,17 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def save():Unit = {
-    //fileIo.save(matchfield)
-    //gameState = LOADED
-    //getCall(urlfileiomodule, "save")
-    //val payload = Json.obj(
-    //  "save" -> true
-    //)
     println("savecall maincontroller")
     getCall(urlfileiomodule, "save")
     publish(new CellShut)
   }
 
   def load():Unit = {
-    //matchfield = fileIo.load
     val payload = Json.obj(
       "load" -> true
     )
     postCall(payload, urlfileiomodule, "load")
-    postCall(payload, urlfileiomodule, "load")
+    Thread.sleep(500)
     publish(new GameLoaded)
     publish(new CellShut)
   }
