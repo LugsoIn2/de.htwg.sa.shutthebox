@@ -57,7 +57,9 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def startGame(t:Integer, ai:Boolean): Unit = {
     //t 0 = SmallField, t 1 = BigField
     //ai 0 = no AI, ai 1 = AI
+    getCall("field")
     createField(t)
+    println(field.length)
     //createDice()
     createPlayers(ai)
     resetMatchfield()
@@ -77,6 +79,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       "bigMatchfield" -> bigField
     )
     postCall(payload, "field")
+
     publish(new FieldCreated)
   }
   def updateField(json: JsValue) : Unit = {

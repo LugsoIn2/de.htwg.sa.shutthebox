@@ -17,6 +17,7 @@ trait ControllerInterface extends Publisher {
   var currentPlayer:playerInterface
   var currentPlayerIndex : Int // to determine, when to show scoreboard
   var matchfield : fieldInterface
+  var field : Array[Boolean]
   var dice:Array[Int]
  /* var gameState : GameState
   var shutState : ShutState

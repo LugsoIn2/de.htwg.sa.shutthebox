@@ -113,7 +113,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
 
   var pnl_matchfield_cells:GridPanel = new GridPanel(1,0) {
     opaque = false
-    for(i <- controller.matchfield.field.indices) {
+    for(i <- controller.field.indices) {
       contents += numButtons(i)
     }
   }
@@ -121,7 +121,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
   def loadGame() : Unit = {
     pnl_matchfield_cells.contents.clear()
     pnl_matchfield_shutcells.contents.clear()
-    for(i <- controller.matchfield.field.indices) {
+    for(i <- controller.field.indices) {
       pnl_matchfield_cells.contents += numButtons(i)
       pnl_matchfield_shutcells.contents += numLabels(i)
     }
@@ -129,7 +129,7 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
 
   var pnl_matchfield_shutcells:GridPanel = new GridPanel(1,0) {
     opaque = false
-    for(i <- controller.matchfield.field.indices) {
+    for(i <- controller.field.indices) {
       contents += numLabels(i)
     }
   }
@@ -194,8 +194,8 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
   }
 
   def updateMatchfield(): Unit = {
-    for (i <- controller.matchfield.field.indices) {
-      if (controller.matchfield.field(i).isShut) {
+    for (i <- controller.field.indices) {
+      if (controller.field(i)) {
         numButtons(i).icon = textures(24)
         numLabels(i).icon = textures(i+12)
       }
