@@ -26,6 +26,8 @@ import scala.concurrent.Future
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
 
+import scala.collection.mutable.ArrayBuffer
+
 
 class Controller @Inject() extends ControllerInterface with Publisher {
   var players:Array[playerInterface] = Array.ofDim[playerInterface](2)
@@ -63,8 +65,66 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     gameState=INGAME
   }
 
+  /*
+  def createField(t:Integer) : Unit = {
+    if (t == 0)
+      matchfield = injector.instance[fieldInterface](Names.named("normal"))
+    else
+      matchfield = injector.instance[fieldInterface](Names.named("big"))
+    publish(new FieldCreated)
+  }*/
 
   def createField(t:Integer) : Unit = {
+    var bigField = false
+    if (t == 0) {
+      bigField  = false
+    } else {
+      bigField = true
+    }
+
+    val payload = Json.obj(
+      "bigMatchfield" -> bigField
+    )
+
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val executionContext = system.executionContext
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Post("http://localhost:9003/field", payload.toString()))
+    responseFuture.onComplete{
+      case Success(res) => {
+        if (res.status == StatusCodes.OK) {
+          val responseBody : Future[String] = Unmarshal(res.entity).to[String]
+          responseBody.onComplete{
+            case Success(body) => {
+              val JsonRes = Json.parse(body)
+
+              println(body)
+              var tmpArray : Array[Boolean] = Array()
+              tmpArray = (JsonRes \ "field").as[Array[Boolean]]
+              println(tmpArray.mkString("Array(", ", ", ")"))
+              for (i <- 0 to tmpArray.length) {
+                field2(i) = tmpArray(1)
+              }
+              println(field2.mkString("Array(", ", ", ")"))
+
+              if (bigField) {
+                var tmpArray : Array[Boolean] = Array()
+                tmpArray = (JsonRes \ "field").as[Array[Boolean]]
+                println(tmpArray.mkString("Array(", ", ", ")"))
+                //field += (JsonRes \ "field").as[Array[Boolean]]
+                //println(field(0))
+                //field(0) += (JsonRes \ "field").as[Boolean].toString
+              } else {
+
+              }
+              }
+
+              //matchfield = (JsonRes \ "field").as[fieldInterface
+            }
+          }
+      }
+    }
+
+
     if (t == 0)
       matchfield = injector.instance[fieldInterface](Names.named("normal"))
     else

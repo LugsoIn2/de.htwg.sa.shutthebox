@@ -32,9 +32,9 @@ object FieldAPI {
               val json = Json.parse(jsonString)
               val bigMatchfield = (json \ "bigMatchfield").as[Boolean]
               if (bigMatchfield) {
-                controller.createField(12)
+                controller.createField(1)
               } else {
-                controller.createField(9)
+                controller.createField(0)
               }
               controller.createDice()
               complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
