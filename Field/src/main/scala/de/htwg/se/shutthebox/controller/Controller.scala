@@ -48,6 +48,17 @@ class Controller {
     }
   }
 
+  def loadFileIO(field : Array[Boolean]) : Unit = {
+    createField(field.length)
+    shutCells(field)
+  }
+
+  def shutCells(field : Array[Boolean]): Unit = {
+    for (i <- field.indices) {
+      matchfield.field(i) = matchfield.field(i).copy(isShut = field(i))
+    }
+  }
+
   def rollDice() : Unit = {
     dice(0) = dice(0).roll
     Thread.sleep(100)

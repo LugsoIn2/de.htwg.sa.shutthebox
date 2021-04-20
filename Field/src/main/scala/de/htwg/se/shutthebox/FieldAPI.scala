@@ -70,6 +70,17 @@ object FieldAPI {
           }
         }
       },
+      pathPrefix("loadFileIO") {
+        post {
+          entity(as[String]) { jsonString => {
+            val json = Json.parse(jsonString)
+            val field = (json \ "field").as[Array[Boolean]]
+            controller.loadFileIO(field)
+            complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
+          }
+          }
+        }
+      },
     )
 
     val bindingFuture = Http().bindAndHandle(route, connectionInterface, connectionPort)

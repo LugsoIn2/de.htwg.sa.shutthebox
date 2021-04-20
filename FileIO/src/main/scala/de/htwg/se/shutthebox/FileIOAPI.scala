@@ -27,8 +27,8 @@ object FileIOAPI {
           post {
             entity(as[String]) { jsonString => {
               println(jsonString)
-              //Function aufruf load Controller
-              complete(HttpEntity(ContentTypes.`application/json`, FileIOController.toString()))
+              val body = FileIOController.load
+              complete(HttpEntity(ContentTypes.`application/json`, body))
             }
             }
           }

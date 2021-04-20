@@ -38,9 +38,12 @@ class FileIO extends FileIOInterface {
     field
   }
   */
-  override def load: Unit = {
-
+  override def load: JsValue = {
+    val source: String = Source.fromFile("field.json").getLines.mkString
+    val json: JsValue = Json.parse(source)
+    json
   }
+
   /*override def save(field: Array[Boolean]): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("field.json"))
