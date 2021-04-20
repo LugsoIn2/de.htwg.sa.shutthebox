@@ -17,7 +17,7 @@ trait ControllerInterface extends Publisher {
   var currentPlayer:playerInterface
   var currentPlayerIndex : Int // to determine, when to show scoreboard
   var matchfield : fieldInterface
-  var dice:Array[dieInterface]
+  var dice:Array[Int]
  /* var gameState : GameState
   var shutState : ShutState
 
@@ -34,7 +34,7 @@ trait ControllerInterface extends Publisher {
   def startGame(t:Integer, ai:Boolean): Unit
   def createField(t:Integer):Unit
   def getField:fieldInterface
-  def createDice():Unit
+  //def createDice():Unit
   def createPlayers(ai:Boolean): Unit
   def getPlayers: Array[playerInterface]
   def getCurrentPlayer : playerInterface
@@ -72,7 +72,7 @@ import scala.swing.event.Event
 
 class DiceRolled extends Event
 class FieldCreated extends Event
-class DiceCreated extends Event
+//class DiceCreated extends Event
 class PlayersCreated extends Event
 class CurrentPlayerSet extends Event
 class Redone extends Event

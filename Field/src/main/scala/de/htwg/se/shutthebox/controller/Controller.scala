@@ -53,6 +53,12 @@ class Controller {
     matchfield.shut(i, matchfield)
   }
 
+  def resetMatchfield(): Unit = {
+    for (i <- 0 until matchfield.field.length) {
+      matchfield.field(i) = matchfield.field(i).copy(isShut = false)
+    }
+  }
+
   def rollDice : Unit = {
     dice(0) = dice(0).roll
     Thread.sleep(100)

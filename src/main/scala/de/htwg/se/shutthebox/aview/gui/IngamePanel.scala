@@ -381,8 +381,8 @@ class IngamePanel(mainFrame:SwingGUI) extends GridPanel(6,1) {
   }
 
   reactions += {
-    case event: DiceRolled => lbl_die1.icon = diceTextures(controller.dice(0).value-1)
-                              lbl_die2.icon = diceTextures(controller.dice(1).value-1)
+    case event: DiceRolled => lbl_die1.icon = diceTextures(controller.dice(0)-1)
+                              lbl_die2.icon = diceTextures(controller.dice(1)-1)
     case event: CellShut => updateMatchfield()
     case event: CurrentPlayerSet => updateMatchfield()
     case event: Undone => updateMatchfield()

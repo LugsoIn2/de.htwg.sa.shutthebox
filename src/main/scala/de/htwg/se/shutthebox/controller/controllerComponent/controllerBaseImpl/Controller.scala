@@ -19,13 +19,12 @@ import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
-import play.api.libs.json.Json
+import play.api.libs.json.{JsObject, JsValue, Json}
 
 import scala.collection.mutable
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
-
 import scala.collection.mutable.ArrayBuffer
 
 
@@ -35,7 +34,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
   var field : Array[Boolean] = Array()
-  var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
+  var dice : Array[Int] = Array(1, 1)
+  //var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
 
@@ -57,21 +57,12 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //t 0 = SmallField, t 1 = BigField
     //ai 0 = no AI, ai 1 = AI
     createField(t)
-    createDice()
+    //createDice()
     createPlayers(ai)
     resetMatchfield()
     //setCurrentPlayer()
     gameState=INGAME
   }
-
-  /*
-  def createField(t:Integer) : Unit = {
-    if (t == 0)
-      matchfield = injector.instance[fieldInterface](Names.named("normal"))
-    else
-      matchfield = injector.instance[fieldInterface](Names.named("big"))
-    publish(new FieldCreated)
-  }*/
 
   def createField(t:Integer) : Unit = {
     var bigField = false
@@ -84,44 +75,26 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     val payload = Json.obj(
       "bigMatchfield" -> bigField
     )
-
-    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
-    implicit val executionContext = system.executionContext
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(Post("http://localhost:9003/field", payload.toString()))
-    responseFuture.onComplete{
-      case Success(res) => {
-        if (res.status == StatusCodes.OK) {
-          val responseBody : Future[String] = Unmarshal(res.entity).to[String]
-          responseBody.onComplete{
-            case Success(body) => {
-              val JsonRes = Json.parse(body)
-              println(body)
-              field = (JsonRes \ "field").as[Array[Boolean]]
-              }
-            }
-          }
-      }
-    }
-
-
-    if (t == 0)
-      matchfield = injector.instance[fieldInterface](Names.named("normal"))
-    else
-      matchfield = injector.instance[fieldInterface](Names.named("big"))
+    postCall(payload, "field")
     publish(new FieldCreated)
   }
-
+  def updateField(json: JsValue) : Unit = {
+    field = (json \ "field").as[Array[Boolean]]
+    val dices = (json \ "dice").as[JsObject]
+    dice(0) = (dices \ "die1").as[Int]
+    dice(1) = (dices \ "die2").as[Int]
+  }
   def getField : fieldInterface = {
     matchfield
   }
-
+  /*
   def createDice(): Unit = {
     //dice = Array(new Die, new Die)
     for (i <- 0 to 1) {
       dice(i) = Die()
     }
     publish(new DiceCreated)
-  }
+  }*/
 
 
   def createPlayers(ai:Boolean): Unit = {
@@ -190,9 +163,9 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def getScore : Int = {
     var score = 0
-    for (i <- 1 to matchfield.field.length) {
+    for (i <- 1 to field.length) {
       score += i
-      if (matchfield.field(i - 1).isShut) {
+      if (field(i - 1)) {
         score -= i
       }
     }
@@ -201,9 +174,14 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def resetMatchfield() : Unit = {
-    for (i <- 1 to matchfield.field.length) {
-      matchfield.field(i-1) = matchfield.field(i-1).copy(isShut = false)
-    }
+    //for (i <- 1 to matchfield.field.length) {
+    //  matchfield.field(i-1) = matchfield.field(i-1).copy(isShut = false)
+    //}
+    //API call mit shut i
+    val payload = Json.obj(
+      "reset" -> "true"
+    )
+    postCall(payload,"resetMatchfield")
   }
 
 
@@ -244,6 +222,12 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
   def doShut(i:Int) : Try[String] = {
     var message = " "
+    println("validNumber0: " + validNumber(0))
+    println("validNumber1: "+ validNumber(1))
+    println("validSum: "+ validSum)
+    println("validDiff: "+ validDiff)
+    println("validMult: "+ validProd)
+    println("validDiv: "+ validDiv)
     if (gameState == ROLLDICE | gameState == SHUT | gameState == UNDOSTATE) {
 
       if((validNumber(0) == i | validNumber(1) == i) & shutState == SHUTSTATE0) {
@@ -284,8 +268,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
     // check, if field is completely shut
     var allShut = true
-    for (i <- matchfield.field.indices) {
-      if (!matchfield.field(i).isShut) {
+    for (i <- field.indices) {
+      if (!field(i)) {
         allShut = false
       }
     }
@@ -299,9 +283,10 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //Aufruf der regeln methode.
     //Soll in validNumber dann die erlaubten Zahlen schreiben
     // 1, 3
-    if (!matchfield.field(dice(0).value - 1).isShut && !matchfield.field(dice(1).value - 1).isShut) {
-      validNumber(0) = dice(0).value
-      validNumber(1) = dice(1).value
+    getCall("field")
+    if (!field(dice(0) - 1) && !field(dice(1) - 1)) {
+      validNumber(0) = dice(0)
+      validNumber(1) = dice(1)
     } else {
       validNumber(0) = 0
       validNumber(1) = 0
@@ -336,9 +321,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     lastShut.clear()
     tmpLastShut.clear()
     if (gameState == INGAME | gameState == SHUT){
-      dice(0) = dice(0).roll
+      //dice(0) = dice(0).roll
+      getCall("rollDice")
       Thread.sleep(100)
-      dice(1) = dice(1).roll
+      //dice(1) = dice(1).roll
+      println("rolldice: " + dice(0), dice(1))
       calcValidShuts()
       gameState=ROLLDICE
       shutState=SHUTSTATE0
@@ -384,5 +371,51 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def update() : Unit = {
     publish(new AIThink)
+  }
+
+  def postCall(payload: JsObject, requestURL: String) : Unit = {
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val executionContext = system.executionContext
+    val responseFuture: Future[HttpResponse] =
+      Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
+    responseFuture.onComplete{
+      case Success(res) => {
+        if (res.status == StatusCodes.OK) {
+          val responseBody : Future[String] = Unmarshal(res.entity).to[String]
+          responseBody.onComplete{
+            case Success(body) => {
+              val JsonRes = Json.parse(body)
+              println(body)
+              updateField(JsonRes)
+            }
+          }
+        }
+      }
+    }
+  }
+
+  def getCall(requestURL: String) : Unit = {
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    // needed for the future flatMap/onComplete in the end
+    implicit val executionContext = system.executionContext
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9003/" + requestURL))
+    responseFuture.onComplete{
+      case Success(res) => {
+        val entityAsText : Future[String] = Unmarshal(res.entity).to[String]
+        entityAsText.onComplete{
+          case Success(body) => {
+            val JsonRes = Json.parse(body)
+            println("getCall " + JsonRes)
+            updateField(JsonRes)
+          }
+          case Failure(_) => println("something Wrong")
+        }
+      }
+      case Failure(_) => sys.error("something wrong")
+    }
+  }
+
+  def putCall() : Unit = {
+
   }
 }
