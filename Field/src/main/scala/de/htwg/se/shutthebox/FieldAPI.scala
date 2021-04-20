@@ -22,7 +22,7 @@ object FieldAPI {
     val controller: Controller = new Controller()
 
     val route = concat(
-      pathPrefix("save") {
+      pathPrefix("field") {
         concat(
           get {
             complete(HttpEntity(ContentTypes.`application/json`, controller.toString))
@@ -43,7 +43,7 @@ object FieldAPI {
             }
         )
       },
-      pathPrefix("load") {
+      pathPrefix("rollDice") {
         get {
           controller.rollDice
           complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))

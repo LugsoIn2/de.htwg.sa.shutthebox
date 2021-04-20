@@ -346,7 +346,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def save():Unit = {
     //fileIo.save(matchfield)
     //gameState = LOADED
-    getCall(urlfileiomodule, "save")
+    //getCall(urlfileiomodule, "save")
+    val payload = Json.obj(
+      "save" -> true
+    )
+    postCall(payload, urlfileiomodule, "save")
     publish(new CellShut)
   }
 
