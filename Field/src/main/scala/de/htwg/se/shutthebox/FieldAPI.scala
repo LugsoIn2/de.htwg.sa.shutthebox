@@ -60,6 +60,16 @@ object FieldAPI {
           }}
         }
       },
+      pathPrefix("resetMatchfield") {
+        post {
+          entity(as[String]) { jsonString => {
+            println(jsonString)
+            controller.resetMatchfield()
+            complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
+          }
+          }
+        }
+      },
     )
 
     val bindingFuture = Http().bindAndHandle(route, connectionInterface, connectionPort)

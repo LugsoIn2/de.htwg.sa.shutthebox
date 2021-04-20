@@ -4,6 +4,7 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.client.RequestBuilding.Post
+import akka.http.scaladsl.client.RequestBuilding.Get
 import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState._
@@ -79,10 +80,10 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     publish(new FieldCreated)
   }
   def updateField(json: JsValue) : Unit = {
-    field = (json \ "field").as[Array[Boolean]]
     val dices = (json \ "dice").as[JsObject]
     dice(0) = (dices \ "die1").as[Int]
     dice(1) = (dices \ "die2").as[Int]
+    field = (json \ "field").as[Array[Boolean]]
   }
   def getField : fieldInterface = {
     matchfield
@@ -262,7 +263,12 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
 
   def shut(i : Int) : Unit = {
-    matchfield.shut(i, matchfield)
+    //matchfield.shut(i, matchfield)
+    val payload = Json.obj(
+      "index" -> i
+    )
+    postCall(payload,"shut")
+
     lastShut.push(i)
     gameState=SHUT
 
@@ -297,7 +303,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     validDiv = calcDice(div)
   }
 
-  def calcDice: ((Int, Int) => Int) => Int = calc(_)(dice(0).value, dice(1).value)
+  def calcDice: ((Int, Int) => Int) => Int = calc(_)(dice(0), dice(1))
 
   def calc(op:(Int, Int)=> Int) (x:Int, y:Int): Int = {
     op(x,y)
@@ -351,7 +357,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     }
   }
 
-  def fieldToString : String = matchfield.toString
+  def fieldToString : String = field.mkString("Array(", ", ", ")")
 
   def rollToString : String =  {
     dice(0).toString + dice(1).toString
