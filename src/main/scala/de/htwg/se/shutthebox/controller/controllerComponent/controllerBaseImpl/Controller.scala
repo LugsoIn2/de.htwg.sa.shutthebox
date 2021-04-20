@@ -70,7 +70,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       matchfield = injector.instance[fieldInterface](Names.named("big"))
     publish(new FieldCreated)
   }
-
+  */
   def getField : fieldInterface = {
     matchfield
   }

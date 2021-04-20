@@ -23,6 +23,8 @@ class Controller {
 
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
 
+  createField(9)
+  createDice()
   def loadMatchfield(): Unit = {
 
   }
@@ -57,20 +59,23 @@ class Controller {
     dice(1) = dice(1).roll
   }
 
-  def controllerToJson : JsValue = {
+  override def toString : String = {
 
     var field: Array[Boolean] = Array()
     for (i <- 0 until this.matchfield.field.length) {
       field = field :+ this.matchfield.field(i).isShut
     }
-    val json: JsValue = Json.parse("""
-      "field" : """ + Json.toJson(field) + """,
-      "dice" : {
-          "die1" : """ + dice(0).value + """,
-          "die2" : """ + dice(1).value + """
+    val jsonString: String =
+      """
+      {
+          "field": """ + field.mkString("[", ", ", "]") + """,
+          "dice" : {
+            "die1" : """ + dice(0).value + """,
+            "die2" : """ + dice(1).value + """
+          }
       }
-    """)
-    json
+      """.stripMargin
+    jsonString
   }
 
 }

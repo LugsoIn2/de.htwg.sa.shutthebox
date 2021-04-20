@@ -25,7 +25,7 @@ object FieldAPI {
       pathPrefix("field") {
         concat(
           get {
-            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
+            complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, controller.toString))
           }, post {
             entity(as[String]) { jsonString => {
               println(jsonString)
@@ -37,7 +37,7 @@ object FieldAPI {
                 controller.createField(9)
               }
               controller.createDice()
-              complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
+              complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
               }
             }
             }
@@ -46,7 +46,7 @@ object FieldAPI {
       pathPrefix("rollDice") {
         get {
           controller.rollDice
-          complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
+          complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
         }
       },
       pathPrefix("shut") {
@@ -56,7 +56,7 @@ object FieldAPI {
             val json = Json.parse(jsonString)
             val index = (json \ "index").as[Int]
             controller.shut(index)
-            complete(HttpEntity(ContentTypes.`application/json`, controller.controllerToJson.toString()))
+            complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
           }}
         }
       },
