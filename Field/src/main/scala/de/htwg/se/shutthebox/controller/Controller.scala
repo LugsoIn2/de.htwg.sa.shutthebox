@@ -23,8 +23,8 @@ class Controller {
 
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
 
-  createField(9)
-  createDice()
+  //createField(9)
+  //createDice()
   def loadMatchfield(): Unit = {
 
   }

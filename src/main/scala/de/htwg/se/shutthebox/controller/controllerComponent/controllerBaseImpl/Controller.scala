@@ -33,6 +33,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
   var field = ArrayBuffer[Boolean]()
+  var field2 : Array[Boolean] = Array()
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
@@ -70,7 +71,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       matchfield = injector.instance[fieldInterface](Names.named("big"))
     publish(new FieldCreated)
   }
-  */
+
   def getField : fieldInterface = {
     matchfield
   }
