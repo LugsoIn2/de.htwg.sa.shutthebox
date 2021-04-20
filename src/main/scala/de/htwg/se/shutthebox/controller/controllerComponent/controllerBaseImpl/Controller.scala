@@ -36,7 +36,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var matchfield : fieldInterface = _
   var field : Array[Boolean] = Array()
   var dice : Array[Int] = Array(1, 1)
-  //var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
 
@@ -59,8 +58,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //ai 0 = no AI, ai 1 = AI
     getCall("field")
     createField(t)
-    println(field.length)
-    //createDice()
     createPlayers(ai)
     resetMatchfield()
     //setCurrentPlayer()
@@ -91,15 +88,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   def getField : fieldInterface = {
     matchfield
   }
-  /*
-  def createDice(): Unit = {
-    //dice = Array(new Die, new Die)
-    for (i <- 0 to 1) {
-      dice(i) = Die()
-    }
-    publish(new DiceCreated)
-  }*/
-
 
   def createPlayers(ai:Boolean): Unit = {
     players(0) = injector.instance[playerInterface](Names.named("player1"))
@@ -179,13 +167,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def resetMatchfield() : Unit = {
     //for (i <- 1 to matchfield.field.length) {
-    //  matchfield.field(i-1) = matchfield.field(i-1).copy(isShut = false)
-    //}
-    //API call mit shut i
     val payload = Json.obj(
       "reset" -> "true"
     )
     postCall(payload,"resetMatchfield")
+    Thread.sleep(200)
   }
 
 
@@ -226,12 +212,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
   def doShut(i:Int) : Try[String] = {
     var message = " "
-    println("validNumber0: " + validNumber(0))
-    println("validNumber1: "+ validNumber(1))
-    println("validSum: "+ validSum)
-    println("validDiff: "+ validDiff)
-    println("validMult: "+ validProd)
-    println("validDiv: "+ validDiv)
     if (gameState == ROLLDICE | gameState == SHUT | gameState == UNDOSTATE) {
 
       if((validNumber(0) == i | validNumber(1) == i) & shutState == SHUTSTATE0) {
@@ -271,7 +251,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       "index" -> i
     )
     postCall(payload,"shut")
-
+    Thread.sleep(200)
     lastShut.push(i)
     gameState=SHUT
 
@@ -329,11 +309,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     lastShut.clear()
     tmpLastShut.clear()
     if (gameState == INGAME | gameState == SHUT){
-      //dice(0) = dice(0).roll
       getCall("rollDice")
       Thread.sleep(500)
-      //dice(1) = dice(1).roll
-      println("rolldice: " + dice(0), dice(1))
       calcValidShuts()
       gameState=ROLLDICE
       shutState=SHUTSTATE0
@@ -342,7 +319,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
       message = "Dice roll not allowed!"
       println(message)
     }
-    if (!message.isEmpty) {
+    if (message.nonEmpty) {
       Some(message)
     }else {
       None
@@ -382,43 +359,39 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def postCall(payload: JsObject, requestURL: String) : Unit = {
-    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
-    implicit val executionContext = system.executionContext
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
     val responseFuture: Future[HttpResponse] =
       Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
     responseFuture.onComplete{
-      case Success(res) => {
+      case Success(res) =>
         if (res.status == StatusCodes.OK) {
           val responseBody : Future[String] = Unmarshal(res.entity).to[String]
           responseBody.onComplete{
-            case Success(body) => {
+            case Success(body) =>
               val JsonRes = Json.parse(body)
-              println(body)
+              println("post: " + body)
               updateField(JsonRes)
-            }
           }
         }
-      }
     }
   }
 
   def getCall(requestURL: String) : Unit = {
-    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     // needed for the future flatMap/onComplete in the end
-    implicit val executionContext = system.executionContext
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
     val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9003/" + requestURL))
     responseFuture.onComplete{
-      case Success(res) => {
+      case Success(res) =>
         val entityAsText : Future[String] = Unmarshal(res.entity).to[String]
         entityAsText.onComplete{
-          case Success(body) => {
+          case Success(body) =>
             val JsonRes = Json.parse(body)
-            println("getCall " + JsonRes)
+            println("get: " + JsonRes)
             updateField(JsonRes)
-          }
           case Failure(_) => println("something Wrong")
         }
-      }
       case Failure(_) => sys.error("something wrong")
     }
   }
