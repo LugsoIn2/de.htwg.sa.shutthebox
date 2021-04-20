@@ -34,8 +34,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   var currentPlayer:playerInterface = players(0)
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
-  var field = ArrayBuffer[Boolean]()
-  var field2 : Array[Boolean] = Array()
+  var field : Array[Boolean] = Array()
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
@@ -96,29 +95,9 @@ class Controller @Inject() extends ControllerInterface with Publisher {
           responseBody.onComplete{
             case Success(body) => {
               val JsonRes = Json.parse(body)
-
               println(body)
-              var tmpArray : Array[Boolean] = Array()
-              tmpArray = (JsonRes \ "field").as[Array[Boolean]]
-              println(tmpArray.mkString("Array(", ", ", ")"))
-              for (i <- 0 to tmpArray.length) {
-                field2(i) = tmpArray(1)
+              field = (JsonRes \ "field").as[Array[Boolean]]
               }
-              println(field2.mkString("Array(", ", ", ")"))
-
-              if (bigField) {
-                var tmpArray : Array[Boolean] = Array()
-                tmpArray = (JsonRes \ "field").as[Array[Boolean]]
-                println(tmpArray.mkString("Array(", ", ", ")"))
-                //field += (JsonRes \ "field").as[Array[Boolean]]
-                //println(field(0))
-                //field(0) += (JsonRes \ "field").as[Boolean].toString
-              } else {
-
-              }
-              }
-
-              //matchfield = (JsonRes \ "field").as[fieldInterface
             }
           }
       }
