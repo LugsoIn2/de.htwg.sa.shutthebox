@@ -50,13 +50,15 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   private var tmpLastShut = mutable.Stack[Int]()
 
   val injector: Injector = Guice.createInjector(new ShutTheBoxModule)
-  val fileIo: FileIOInterface = injector.instance[FileIOInterface]
+  //val fileIo: FileIOInterface = injector.instance[FileIOInterface]
 
+  val urlfieldmodule = "http://localhost:9003/"
+  val urlfileiomodule = "http://localhost:9004/"
 
   def startGame(t:Integer, ai:Boolean): Unit = {
     //t 0 = SmallField, t 1 = BigField
     //ai 0 = no AI, ai 1 = AI
-    getCall("field")
+    getCall(urlfieldmodule, "field")
     createField(t)
     createPlayers(ai)
     resetMatchfield()
@@ -75,8 +77,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     val payload = Json.obj(
       "bigMatchfield" -> bigField
     )
-    postCall(payload, "field")
-
+    postCall(payload, urlfieldmodule, "field")
     publish(new FieldCreated)
   }
   def updateField(json: JsValue) : Unit = {
@@ -170,7 +171,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     val payload = Json.obj(
       "reset" -> "true"
     )
-    postCall(payload,"resetMatchfield")
+    postCall(payload, urlfieldmodule, "resetMatchfield")
     Thread.sleep(200)
   }
 
@@ -250,7 +251,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     val payload = Json.obj(
       "index" -> i
     )
-    postCall(payload,"shut")
+    postCall(payload, urlfieldmodule, "shut")
     Thread.sleep(200)
     lastShut.push(i)
     gameState=SHUT
@@ -309,7 +310,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     lastShut.clear()
     tmpLastShut.clear()
     if (gameState == INGAME | gameState == SHUT){
-      getCall("rollDice")
+      getCall(urlfieldmodule, "rollDice")
       Thread.sleep(500)
       calcValidShuts()
       gameState=ROLLDICE
@@ -343,13 +344,14 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   }
 
   def save():Unit = {
-    fileIo.save(matchfield)
+    //fileIo.save(matchfield)
     //gameState = LOADED
+    getCall(urlfileiomodule, "save")
     publish(new CellShut)
   }
 
   def load():Unit = {
-    matchfield = fileIo.load
+    //matchfield = fileIo.load
     publish(new GameLoaded)
     publish(new CellShut)
   }
@@ -358,11 +360,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     publish(new AIThink)
   }
 
-  def postCall(payload: JsObject, requestURL: String) : Unit = {
+  def postCall(payload: JsObject, host : String, requestURL: String) : Unit = {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
     val responseFuture: Future[HttpResponse] =
-      Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
+      Http().singleRequest(Post(host + requestURL, payload.toString()))
     responseFuture.onComplete{
       case Success(res) =>
         if (res.status == StatusCodes.OK) {
@@ -377,11 +379,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     }
   }
 
-  def getCall(requestURL: String) : Unit = {
+  def getCall(host: String, requestURL: String) : Unit = {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9003/" + requestURL))
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get(host + requestURL))
     responseFuture.onComplete{
       case Success(res) =>
         val entityAsText : Future[String] = Unmarshal(res.entity).to[String]

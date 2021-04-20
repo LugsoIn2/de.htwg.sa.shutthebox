@@ -12,9 +12,10 @@ import play.api.libs.json._
 
 
 class FileIO extends FileIOInterface {
-
+  /*
   override def load: fieldInterface = {
-    var field: fieldInterface = null
+    //var field: fieldInterface = null
+    var field : Array[Boolean] = Array()
     val source: String = Source.fromFile("field.json").getLines.mkString
     val json: JsValue = Json.parse(source)
     val matchfieldSize = (json \ "field" \ "size").get.toString.toInt
@@ -36,12 +37,21 @@ class FileIO extends FileIOInterface {
     }
     field
   }
+  */
+  override def load: Unit = {
 
-
-  override def save(field: fieldInterface): Unit = {
+  }
+  /*override def save(field: Array[Boolean]): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("field.json"))
     pw.write(Json.prettyPrint(fieldToJson(field)))
+    pw.close
+  }
+
+  override def save(field : Array[Boolean]): Unit = {
+    import java.io._
+    val pw = new PrintWriter(new File("field.json"))
+    pw.write(Json.prettyPrint(Json.parse(field.mkString("{", ", ", "}"))))
     pw.close
   }
 

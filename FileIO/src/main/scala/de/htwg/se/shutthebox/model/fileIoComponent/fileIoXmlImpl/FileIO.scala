@@ -15,7 +15,7 @@ import scala.xml.{NodeSeq, PrettyPrinter}
 
 class FileIO extends FileIOInterface {
 
-  override def load: fieldInterface = {
+  override def load: Unit = {
     var field: fieldInterface = null
     var file = scala.xml.XML.loadFile("field.xml")
     val matchfieldSizeAttr = (file \ "field" \ "@size")
@@ -58,11 +58,18 @@ class FileIO extends FileIOInterface {
       )
     )
   }
-
+  /*
   override def save(field: fieldInterface): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("field.xml"))
     pw.write(Json.prettyPrint(fieldToXml(field)))
+    pw.close
+  } */
+
+  override def save(field : Array[Boolean]): Unit = {
+    import java.io._
+    val pw = new PrintWriter(new File("field.xml"))
+    pw.write(Json.prettyPrint(Json.parse(field.mkString("{", ", ", "}"))))
     pw.close
   }
 }

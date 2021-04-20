@@ -25,6 +25,5 @@ class ShutTheBoxModule extends AbstractModule with ScalaModule {
     bind[playerInterface].annotatedWithName("player1").toInstance(new Player("Player 1"))
     bind[playerInterface].annotatedWithName("player2").toInstance(new Player("Player 2"))
 
-    bind[FileIOInterface].to[fileIoJsonImpl.FileIO]
   }
 }
