@@ -20,18 +20,10 @@ class FileIOController {
 
   val injector = Guice.createInjector(new FileIOModule)
   val fileIO = injector.instance[FileIOInterface]
-  var field : Array[Boolean] = Array()
 
-  def updateField(json: JsValue) : Unit = {
-    field = (json \ "field").as[Array[Boolean]]
-    println("field")
-    println(field.mkString("{", ", ", "}"))
-  }
 
   def save():Unit = {
     getCall("field")
-    Thread.sleep(500)
-    fileIO.save(field)
   }
 
   def load():Unit = {
@@ -69,8 +61,7 @@ class FileIOController {
         entityAsText.onComplete{
           case Success(body) =>
             val JsonRes = Json.parse(body)
-            println("get: " + JsonRes)
-            updateField(JsonRes)
+            fileIO.save(JsonRes)
           case Failure(_) => println("something Wrong")
         }
       case Failure(_) => sys.error("something wrong")

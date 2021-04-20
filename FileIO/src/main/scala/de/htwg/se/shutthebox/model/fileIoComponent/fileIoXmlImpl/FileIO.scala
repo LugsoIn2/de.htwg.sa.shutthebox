@@ -6,7 +6,7 @@ import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.ShutTheBoxModule
 import de.htwg.se.shutthebox.model.fieldComponent.fieldInterface
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
-import play.api.libs.json.{JsNumber, JsValue, Json}
+import play.api.libs.json.{JsNumber, JsObject, JsValue, Json}
 
 import scala.xml._
 import scala.io.Source
@@ -66,10 +66,13 @@ class FileIO extends FileIOInterface {
     pw.close
   } */
 
-  override def save(field : Array[Boolean]): Unit = {
+  override def save(field : JsValue): Unit = {
     import java.io._
-    val pw = new PrintWriter(new File("field.xml"))
-    pw.write(Json.prettyPrint(Json.parse(field.mkString("{", ", ", "}"))))
+    val pw = new PrintWriter(new File("field.json"))
+    //println("jetzt hier")
+    //println(Json.prettyPrint(Json.parse(field.mkString("[", ", ", "]"))))
+    pw.write(Json.prettyPrint(field))
     pw.close
   }
+
 }

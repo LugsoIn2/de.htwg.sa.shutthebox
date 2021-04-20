@@ -48,12 +48,10 @@ class FileIO extends FileIOInterface {
     pw.close
   }*/
 
-  override def save(field : Array[Boolean]): Unit = {
+  override def save(field : JsValue): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("field.json"))
-    //println("jetzt hier")
-    //println(Json.prettyPrint(Json.parse(field.mkString("[", ", ", "]"))))
-    pw.write(Json.prettyPrint(Json.parse(field.mkString("[", ", ", "]"))))
+    pw.write(Json.prettyPrint(field))
     pw.close
   }
 
@@ -65,7 +63,7 @@ class FileIO extends FileIOInterface {
   }
 
 
-  def fieldToJson(field: fieldInterface) = {
+  /*def fieldToJson(field: fieldInterface) = {
     Json.obj(
       "field" -> Json.obj(
         "size" -> JsNumber(field.field.size),
@@ -81,6 +79,6 @@ class FileIO extends FileIOInterface {
         )
       )
     )
-  }
+  }*/
 
 }
