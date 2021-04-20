@@ -16,14 +16,17 @@ import play.api.libs.json.{JsObject, JsValue, Json}
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
-class Controller {
+class FileIOController {
 
   val injector = Guice.createInjector(new FileIOModule)
   val fileIO = injector.instance[FileIOInterface]
   var field : Array[Boolean] = Array()
 
-  def updateField(json: JsValue) : Unit =
+  def updateField(json: JsValue) : Unit = {
     field = (json \ "field").as[Array[Boolean]]
+    println("field")
+    println(field.mkString("{", ", ", "}"))
+  }
 
   def save():Unit = {
     getCall("field")
@@ -41,7 +44,7 @@ class Controller {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
     val responseFuture: Future[HttpResponse] =
-      Http().singleRequest(Post("http://localhost:9004/" + requestURL, payload.toString()))
+      Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
     responseFuture.onComplete{
       case Success(res) =>
         if (res.status == StatusCodes.OK) {
@@ -59,7 +62,7 @@ class Controller {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9004/" + requestURL))
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9003/" + requestURL))
     responseFuture.onComplete{
       case Success(res) =>
         val entityAsText : Future[String] = Unmarshal(res.entity).to[String]

@@ -347,10 +347,11 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     //fileIo.save(matchfield)
     //gameState = LOADED
     //getCall(urlfileiomodule, "save")
-    val payload = Json.obj(
-      "save" -> true
-    )
-    postCall(payload, urlfileiomodule, "save")
+    //val payload = Json.obj(
+    //  "save" -> true
+    //)
+    println("savecall maincontroller")
+    getCall(urlfileiomodule, "save")
     publish(new CellShut)
   }
 
@@ -393,14 +394,38 @@ class Controller @Inject() extends ControllerInterface with Publisher {
         val entityAsText : Future[String] = Unmarshal(res.entity).to[String]
         entityAsText.onComplete{
           case Success(body) =>
-            val JsonRes = Json.parse(body)
-            println("get: " + JsonRes)
-            updateField(JsonRes)
+            if (body == "Saved Success") {
+              println(body)
+            } else {
+              val JsonRes = Json.parse(body)
+              println("get: " + JsonRes)
+              updateField(JsonRes)
+            }
           case Failure(_) => println("something Wrong")
         }
       case Failure(_) => sys.error("something wrong")
     }
   }
+
+  def getCallfileio(host: String, requestURL: String) : Unit = {
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
+    // needed for the future flatMap/onComplete in the end
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get(host + requestURL))
+    responseFuture.onComplete{
+      case Success(res) =>
+        val entityAsText : Future[String] = Unmarshal(res.entity).to[String]
+        entityAsText.onComplete{
+          case Success(body) => println(body)
+            //val JsonRes = Json.parse(body)
+            //println("get: " + JsonRes)
+            //updateField(JsonRes)
+          case Failure(_) => println("something Wrong")
+        }
+      case Failure(_) => sys.error("something wrong")
+    }
+  }
+
 
   def putCall() : Unit = {
 

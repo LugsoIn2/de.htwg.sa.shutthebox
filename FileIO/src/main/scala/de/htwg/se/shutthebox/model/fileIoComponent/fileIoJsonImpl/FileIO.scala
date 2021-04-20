@@ -51,7 +51,9 @@ class FileIO extends FileIOInterface {
   override def save(field : Array[Boolean]): Unit = {
     import java.io._
     val pw = new PrintWriter(new File("field.json"))
-    pw.write(Json.prettyPrint(Json.parse(field.mkString("{", ", ", "}"))))
+    //println("jetzt hier")
+    //println(Json.prettyPrint(Json.parse(field.mkString("[", ", ", "]"))))
+    pw.write(Json.prettyPrint(Json.parse(field.mkString("[", ", ", "]"))))
     pw.close
   }
 

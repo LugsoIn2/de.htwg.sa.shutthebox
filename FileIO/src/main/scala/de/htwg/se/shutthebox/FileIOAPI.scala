@@ -4,7 +4,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
-import de.htwg.se.shutthebox.controller.Controller
+import de.htwg.se.shutthebox.controller.FileIOController
 import play.api.libs.json.{JsObject, JsValue, Json}
 
 import scala.concurrent.ExecutionContextExecutor
@@ -19,30 +19,39 @@ object FileIOAPI {
     implicit val actorSystem: ActorSystem = ActorSystem("actorSystem")
     implicit val executionContext: ExecutionContextExecutor = actorSystem.dispatcher
 
-    val controller: Controller = new Controller()
+    val FileIOController: FileIOController = new FileIOController()
 
     val route = concat(
-      pathPrefix("field") {
+      pathPrefix("load") {
         concat(
-          get {
-            complete(HttpEntity(ContentTypes.`application/json`, controller.toString))
-          }, post {
+          post {
             entity(as[String]) { jsonString => {
               println(jsonString)
               //Function aufruf load Controller
-              complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
+              complete(HttpEntity(ContentTypes.`application/json`, FileIOController.toString()))
             }
             }
           }
         )
       },
-      pathPrefix("rollDice") {
+      pathPrefix("save") {
         get {
-          controller.save()
-          complete(HttpEntity(ContentTypes.`application/json`, controller.toString()))
+          FileIOController.save()
+          println("savecall erhalten")
+          complete(HttpEntity(ContentTypes.`application/json`, "Saved Success"))
         }
       },
     )
 
+    val bindingFuture = Http().bindAndHandle(route, connectionInterface, connectionPort)
+
+
+    println(s"Server online at http://$connectionInterface:$connectionPort/\nPress RETURN to stop...")
+    StdIn.readLine() // let it run until user presses return
+    bindingFuture
+      .flatMap(_.unbind()) // trigger unbinding from the port
+      .onComplete(_ => actorSystem.terminate()) // and shutdown when done
+
   }
+
 }
