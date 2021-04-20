@@ -46,7 +46,7 @@ class FileIO extends FileIOInterface {
     val pw = new PrintWriter(new File("field.json"))
     pw.write(Json.prettyPrint(fieldToJson(field)))
     pw.close
-  }
+  }*/
 
   override def save(field : Array[Boolean]): Unit = {
     import java.io._
