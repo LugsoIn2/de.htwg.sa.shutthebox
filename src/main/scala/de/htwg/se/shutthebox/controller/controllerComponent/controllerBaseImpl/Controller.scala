@@ -15,25 +15,19 @@ import de.htwg.se.shutthebox.ShutTheBoxModule
 import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.controller.controllerComponent._
 import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
-import de.htwg.se.shutthebox.model.fieldComponent.fieldBaseImpl.Die
-import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
-import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
 import play.api.libs.json.{JsObject, JsValue, Json}
-
 import scala.collection.mutable
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
-import scala.collection.mutable.ArrayBuffer
 
 
 class Controller @Inject() extends ControllerInterface with Publisher {
   var players:Array[playerInterface] = Array.ofDim[playerInterface](2)
   var currentPlayer:playerInterface = players(0)
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
-  var matchfield : fieldInterface = _
   var field : Array[Boolean] = Array()
   var dice : Array[Int] = Array(1, 1)
   var gameState : GameState = MENU
@@ -85,9 +79,6 @@ class Controller @Inject() extends ControllerInterface with Publisher {
     dice(0) = (dices \ "die1").as[Int]
     dice(1) = (dices \ "die2").as[Int]
     field = (json \ "field").as[Array[Boolean]]
-  }
-  def getField : fieldInterface = {
-    matchfield
   }
 
   def createPlayers(ai:Boolean): Unit = {

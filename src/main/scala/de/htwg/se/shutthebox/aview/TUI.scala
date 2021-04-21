@@ -5,7 +5,7 @@ import de.htwg.se.shutthebox.util.Observer
 import de.htwg.se.shutthebox.controller._
 import de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.shutthebox.controller.controllerComponent._
-import de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl.BigField
+//FIXME import de.htwg.se.shutthebox.model.fieldComponent.fieldAdvancedImpl.BigField
 
 import scala.swing.Reactor
 import scala.util.{Failure, Success}
@@ -52,11 +52,11 @@ class TUI(controller:ControllerInterface) extends Reactor {
         case "7" => controller.cmdShut(7)
         case "8" => controller.cmdShut(8)
         case "9" => controller.cmdShut(9)
-        case "10" => if (controller.getField.isInstanceOf[BigField])
+          //FIXME case "10" => if (controller.getField.isInstanceOf[BigField])
                         controller.cmdShut(10)
-        case "11" => if (controller.getField.isInstanceOf[BigField])
+          //FIXME case "11" => if (controller.getField.isInstanceOf[BigField])
                         controller.cmdShut(11)
-        case "12" => if (controller.getField.isInstanceOf[BigField])
+          //FIXME case "12" => if (controller.getField.isInstanceOf[BigField])
                         controller.cmdShut(12)
         case default => ""
       }

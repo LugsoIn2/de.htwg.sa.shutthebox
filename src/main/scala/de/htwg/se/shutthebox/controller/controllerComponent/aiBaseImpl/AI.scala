@@ -43,9 +43,9 @@ class AI(controller:Controller) extends Player("AI") with aiInterface {
       var currentMaxIndex = validShuts.indexOf(validShuts.max)
 
       // if maximum is in range of matchfield
-      if (currentMax > 0 && currentMax <= controller.matchfield.field.length ) {
+      if (currentMax > 0 && currentMax <= controller.field.length ) {
         // if the cell isn't already shut
-        if (!controller.matchfield.field(currentMax-1).isShut) {
+        if (!controller.field(currentMax-1)) {
           controller.doShut(validShuts.max) match {
             case Success(value) => ""
             case Failure(exception) => exception.getMessage
@@ -56,7 +56,7 @@ class AI(controller:Controller) extends Player("AI") with aiInterface {
 
           if (singleShuts(0) != 0 & singleShuts(1) != 0) {
             // if the two single dice values aren't already shut
-            if ((singleShuts(0) != singleShuts(1)) & !controller.matchfield.field(singleShuts(0) - 1).isShut && !controller.matchfield.field(singleShuts(1) - 1).isShut) {
+            if ((singleShuts(0) != singleShuts(1)) & !controller.field(singleShuts(0) - 1) && !controller.field(singleShuts(1) - 1)) {
               // shut the single die values
               controller.doShut(singleShuts(0)) match {
                 case Success(value) => ""
@@ -70,7 +70,7 @@ class AI(controller:Controller) extends Player("AI") with aiInterface {
               think()
             }
 
-            else if ((singleShuts(0) == singleShuts(1)) | !controller.matchfield.field(singleShuts(0) - 1).isShut | !controller.matchfield.field(singleShuts(1) - 1).isShut) {
+            else if ((singleShuts(0) == singleShuts(1)) | !controller.field(singleShuts(0) - 1) | !controller.field(singleShuts(1) - 1)) {
               analyze()
             }
           } else

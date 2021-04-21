@@ -34,7 +34,6 @@ class FileIOController {
     Thread.sleep(1000)
     println("Postbuddy in load: " + postBody)
     postBody
-    //response zurück an Main Coontroller
   }
 
 

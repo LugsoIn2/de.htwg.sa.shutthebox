@@ -15,7 +15,7 @@ lazy val rootProject = (project in file(".")).settings(
   libraryDependencies += "com.typesafe.akka" %% "akka-actor-typed" % "2.6.8",
   libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.6.8",
   libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.2.4"
-).dependsOn(FileIO, Field)
+)//.dependsOn(FileIO, Field)
 
 lazy val FileIO = project in file("FileIO")
 lazy val Field = project in file("Field")

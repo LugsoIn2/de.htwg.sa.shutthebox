@@ -2,7 +2,6 @@ package de.htwg.se.shutthebox.controller.controllerComponent
 
 import de.htwg.se.shutthebox.controller.controllerComponent.GameState.{GameState, MENU}
 import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{SHUTSTATE0, ShutState}
-import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
 import de.htwg.se.shutthebox.model.playerComponent.playerImpl.Player
 import de.htwg.se.shutthebox.model.playerComponent.playerInterface
 import de.htwg.se.shutthebox.util.UndoManager
@@ -16,7 +15,6 @@ trait ControllerInterface extends Publisher {
   var players:Array[playerInterface]
   var currentPlayer:playerInterface
   var currentPlayerIndex : Int // to determine, when to show scoreboard
-  var matchfield : fieldInterface
   var field : Array[Boolean]
   var dice:Array[Int]
  /* var gameState : GameState
@@ -34,7 +32,6 @@ trait ControllerInterface extends Publisher {
 
   def startGame(t:Integer, ai:Boolean): Unit
   def createField(t:Integer):Unit
-  def getField:fieldInterface
   //def createDice():Unit
   def createPlayers(ai:Boolean): Unit
   def getPlayers: Array[playerInterface]
