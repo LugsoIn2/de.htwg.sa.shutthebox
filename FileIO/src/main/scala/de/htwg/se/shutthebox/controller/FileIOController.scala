@@ -41,7 +41,7 @@ class FileIOController {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
     val responseFuture: Future[HttpResponse] =
-      Http().singleRequest(Post("http://localhost:9003/" + requestURL, payload.toString()))
+      Http().singleRequest(Post("http://fieldservice:9003/" + requestURL, payload.toString()))
     responseFuture.onComplete{
       case Success(res) =>
         if (res.status == StatusCodes.OK) {
@@ -60,7 +60,7 @@ class FileIOController {
     implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://localhost:9003/" + requestURL))
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(Get("http://fieldservice:9003/" + requestURL))
     responseFuture.onComplete{
       case Success(res) =>
         val entityAsText : Future[String] = Unmarshal(res.entity).to[String]

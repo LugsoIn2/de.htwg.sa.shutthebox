@@ -46,8 +46,8 @@ class Controller @Inject() extends ControllerInterface with Publisher {
   val injector: Injector = Guice.createInjector(new ShutTheBoxModule)
   //val fileIo: FileIOInterface = injector.instance[FileIOInterface]
 
-  val urlfieldmodule = "http://localhost:9003/"
-  val urlfileiomodule = "http://localhost:9004/"
+  val urlfieldmodule = "http://fieldservice:9003/"
+  val urlfileiomodule = "http://fileioservice:9004/"
 
   def startGame(t:Integer, ai:Boolean): Unit = {
     //t 0 = SmallField, t 1 = BigField
