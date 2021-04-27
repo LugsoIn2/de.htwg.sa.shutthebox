@@ -1,0 +1,27 @@
+version: "3.0"
+
+services:
+  field:
+    build:
+      context: ./
+      dockerfile: ./Field/Dockerfile
+    ports:
+      - 9003:9003
+    stdin_open: true
+    container_name: fieldservice
+  fileio:
+    build:
+      context: ./
+      dockerfile: ./FileIO/Dockerfile
+    ports:
+      - 9004:9004
+    stdin_open: true
+    container_name: fileioservice
+  shutthebox:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    stdin_open: true
+    container_name: rootservice
+    environment:
+      - DISPLAY=10.0.3.9:0
