@@ -403,8 +403,4 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   }
 
-  def testi() : Unit = {
-    val dataBase: PlayerDAOInterface = injector.getInstance(classOf[PlayerDAOInterface])
-    dataBase.create()
-  }
 }

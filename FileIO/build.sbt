@@ -15,3 +15,6 @@ libraryDependencies += "com.typesafe.play" %% "play-json" % "2.7.1"
 libraryDependencies += "com.typesafe.akka" %% "akka-actor-typed" % AkkaVersion
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % AkkaVersion
 libraryDependencies += "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+libraryDependencies += "mysql" % "mysql-connector-java" % "6.0.6"

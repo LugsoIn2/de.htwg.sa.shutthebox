@@ -22,28 +22,14 @@ import scala.concurrent.duration.{Duration, DurationInt}
 
 case class PlayerDAO() extends PlayerDAOInterface {
 
-  //val db = Database.forConfig("db.conf")
-  //val player = TableQuery[PlayerSchema]
-  //val ddl = (PlayerSchema.ddl)
-  //val connectionUrl = "jdbc:postgresql://localhost/my-db?user=postgres&password=postgres"
-
   val db: jdbc.JdbcBackend.DatabaseDef = Database.forURL(
-    url = "jdbc:mysql://localhost/playerdb",
+    url = "jdbc:mysql://localhost:3306/playerdb?serverTimezone=UTC",
     user = "playerdbuser",
     password = "Abc123",
     driver = "com.mysql.cj.jdbc.Driver",
   )
 
-
-
   val playertablequery = TableQuery[PlayerSchema]
-
-  /*val setup = DBIO.seq(
-    (playertablequery.schema).create,
-      playertablequery += (100, 20),
-    playertablequery += (200, 10)
-
-  )*/
 
   val setup = DBIO.seq((
     playertablequery.schema
@@ -54,7 +40,7 @@ case class PlayerDAO() extends PlayerDAOInterface {
 
 
   override def create(): Unit = {
-    initPlayerTable(1, 20, playertablequery)
+    //initPlayerTable(1, 20, playertablequery)
   }
 
   override def read(): AnyRef = ???
