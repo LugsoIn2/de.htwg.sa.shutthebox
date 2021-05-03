@@ -22,6 +22,8 @@ import scala.collection.mutable
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
+import de.htwg.se.shutthebox.model.DAOComponent.PlayerDAOInterface
+
 
 
 class Controller @Inject() extends ControllerInterface with Publisher {
@@ -399,5 +401,10 @@ class Controller @Inject() extends ControllerInterface with Publisher {
 
   def putCall() : Unit = {
 
+  }
+
+  def testi() : Unit = {
+    val dataBase: PlayerDAOInterface = injector.getInstance(classOf[PlayerDAOInterface])
+    dataBase.create()
   }
 }

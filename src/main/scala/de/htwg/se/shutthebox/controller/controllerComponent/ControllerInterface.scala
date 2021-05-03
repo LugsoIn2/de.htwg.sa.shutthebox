@@ -64,6 +64,7 @@ trait ControllerInterface extends Publisher {
   def load(): Unit
   def save():Unit
   def update():Unit
+  def testi(): Unit
 }
 
 import scala.swing.event.Event

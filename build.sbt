@@ -17,7 +17,10 @@ lazy val rootProject = (project in file(".")).settings(
   libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.2.4",
   libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3",
   libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3",
-  libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4"
+  //libraryDependencies += "org.postgresql" % "postgresql" % "42.1.4",
+  //libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1206-jdbc42"
+  libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.20"
+
 
   //resolvers += "Typesafe Releases" at "http://repo.typesafe.com/..."
 )//.dependsOn(FileIO, Field)

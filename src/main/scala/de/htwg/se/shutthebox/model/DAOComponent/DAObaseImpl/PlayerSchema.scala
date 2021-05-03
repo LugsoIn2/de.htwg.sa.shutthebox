@@ -1,6 +1,7 @@
 package de.htwg.se.shutthebox.model.DAOComponent.DAObaseImpl
 
-import slick.jdbc.PostgresProfile.api._
+//import slick.jdbc.PostgresProfile.api._
+import slick.jdbc.MySQLProfile.api._
 
 
 class PlayerSchema(tag: Tag) extends Table[(Int, Int)] (tag,"playertable"){

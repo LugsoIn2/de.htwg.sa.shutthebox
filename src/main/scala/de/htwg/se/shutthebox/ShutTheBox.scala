@@ -18,7 +18,7 @@ object ShutTheBox {
 
   def main(args: Array[String]): Unit = {
 
-
+    controller.testi()
     val name = "ShutTheBox"
     var input = ""
     do {
