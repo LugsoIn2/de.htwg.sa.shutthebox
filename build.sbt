@@ -14,7 +14,11 @@ lazy val rootProject = (project in file(".")).settings(
   libraryDependencies += "com.typesafe.play" %% "play-json" % "2.7.1",
   libraryDependencies += "com.typesafe.akka" %% "akka-actor-typed" % "2.6.8",
   libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.6.8",
-  libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.2.4"
+  libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.2.4",
+  libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3",
+  libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
+
+  //resolvers += "Typesafe Releases" at "http://repo.typesafe.com/..."
 )//.dependsOn(FileIO, Field)
 
 lazy val FileIO = project in file("FileIO")
