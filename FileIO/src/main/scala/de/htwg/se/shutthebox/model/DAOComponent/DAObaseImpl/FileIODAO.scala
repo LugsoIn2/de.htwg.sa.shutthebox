@@ -24,7 +24,7 @@ case class FileIODAO() extends FileIODAOInterface{
     password = "Abc123",
     driver = "com.mysql.cj.jdbc.Driver",
   )
-  println("Connect to: FIELLLLLLLLLLLD: ")
+  println("Connect to: FieldDatabase ")
 
   val fieldSchema = TableQuery[FieldSchema]
   val diceSchema = TableQuery[DiceSchema]
@@ -36,11 +36,6 @@ case class FileIODAO() extends FileIODAOInterface{
 
   override def create(json: JsValue): Unit = {
     Await.result(db.run(setup), atMost = 10.second)
-    println("deine mama hat eine datenbank :)")
-
-    //Theoretisch würde das reichen und wir nehmen dann beim load immer das mit der höchsten ID
-    //also das zuletzt gespeicherte
-    //funzt auch genauso wie methode 2 unten
     val field = (json \ "field").as[Array[Boolean]]
 
     if (field.length == 9) {
@@ -54,50 +49,20 @@ case class FileIODAO() extends FileIODAOInterface{
     val dices = (json \ "dice").as[JsObject]
     val insertquerydice = DBIO.seq(diceSchema += (1, (dices \ "die1").as[Int], (dices \ "die2").as[Int]))
     Await.result(db.run(insertquerydice), atMost = 10.second)
-
-
-
-    //oder das bringt aber nicht viel, da auto encrease von db gemacht wird
-    //initFieldTable(0, json, fieldSchema)
   }
 
   override def read(): String = {
     val resultdice = Await.result(db.run(diceSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
     val resultfield = Await.result(db.run(fieldSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
 
-    println("YIELD:" + resultfield)
-    println("YIELD:" + resultfield.head)
-    println("YIELD:" + resultfield.head._1)
-    println("YIELD:" + resultfield.head._2)
-    println("LENGTHSDDSD:" + resultfield.length)
-    /*
-    var field: Array[Boolean] = Array()
-    val tmp = resultfield.head
-    field :+  resultfield.head._2
-    field :+  tmp._3
-    field :+  tmp._4
-    field :+  tmp._5
-    field :+  tmp._6
-    field :+  tmp._7
-    field :+  tmp._8
-    field :+  tmp._9
-    field :+  tmp._10
-
-    if (tmp._11.isDefined) {
-      field :+  tmp._11.asInstanceOf[Boolean]
-      field :+  tmp._12.asInstanceOf[Boolean]
-      field :+  tmp._13.asInstanceOf[Boolean]
-    }*/
     var field = "[" + resultfield.head._2 + "," + resultfield.head._3 + "," + resultfield.head._4 + "," +
                       resultfield.head._5 + "," + resultfield.head._6 + "," + resultfield.head._7 + "," +
                       resultfield.head._8 + "," + resultfield.head._9 + "," + resultfield.head._10
     if (resultfield.head._11.isDefined && resultfield.head._12.isDefined && resultfield.head._13.isDefined) {
-      field = resultfield.head._11 + "," + resultfield.head._12 + "," + resultfield.head._13 + "]"
+      field = field + "," + resultfield.head._11.get + "," + resultfield.head._12.get + "," + resultfield.head._13.get + "]"
     } else {
       field = field + "]"
     }
-    //"field": """ + field.mkString("[", ", ", "]") + """,
-    println(field)
     val jsonString: String = {
       """
       {
@@ -110,27 +75,11 @@ case class FileIODAO() extends FileIODAOInterface{
       """.stripMargin
 
     }
-    println("jsonString" + jsonString)
     jsonString
   }
   override def update(): Unit = ???
 
   override def delete(): Unit = ???
-
-  /*private def initFieldTable(id: Int, json: JsValue, query: TableQuery[FieldSchema]) : Unit = {
-    val updateQuery = {
-      query.filter(_.id === id).exists.result.flatMap(exists =>
-        if (!exists) {
-          val field = (json \ "field").as[Array[Boolean]]
-          query += (id,field(1), field(2), field(3), field(4), field(5), field(6),
-                    field(7), field(8), field(9), field(10), field(11), field(12))
-        } else {
-          DBIO.successful(None)
-        }
-      ).transactionally
-    }
-    Await.result(db.run(updateQuery), atMost = 10.second)
-  }*/
 
   private def initFieldTable(id: Int, json: JsValue, query: TableQuery[FieldSchema]) : Unit = {
     val updateQuery = {
@@ -153,6 +102,5 @@ case class FileIODAO() extends FileIODAOInterface{
     }
     Await.result(db.run(updateQuery), atMost = 10.second)
   }
-
 
 }

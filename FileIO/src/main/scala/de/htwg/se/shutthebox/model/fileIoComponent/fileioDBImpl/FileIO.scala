@@ -6,8 +6,6 @@ import de.htwg.se.shutthebox.model.DAOComponent.FileIODAOInterface
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
 import play.api.libs.json.{JsValue, Json}
 
-import scala.io.Source
-
 class FileIO extends FileIOInterface{
 
   val injector: Injector = Guice.createInjector(new FileIOModule)
