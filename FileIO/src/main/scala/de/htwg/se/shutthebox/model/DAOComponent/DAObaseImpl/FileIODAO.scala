@@ -70,30 +70,41 @@ case class FileIODAO() extends FileIODAOInterface{
     println("YIELD:" + resultfield.head._1)
     println("YIELD:" + resultfield.head._2)
     println("LENGTHSDDSD:" + resultfield.length)
-
-    var field: Array[Any] = Array()
+    /*
+    var field: Array[Boolean] = Array()
     val tmp = resultfield.head
-    field(0) =  tmp._2
-    field(1) =  tmp._3
-    field(2) =  tmp._4
-    field(3) =  tmp._5
-    field(4) =  tmp._6
-    field(5) =  tmp._7
-    field(6) =  tmp._8
-    field(7) =  tmp._9
-    field(8) =  tmp._10
+    field :+  resultfield.head._2
+    field :+  tmp._3
+    field :+  tmp._4
+    field :+  tmp._5
+    field :+  tmp._6
+    field :+  tmp._7
+    field :+  tmp._8
+    field :+  tmp._9
+    field :+  tmp._10
+
     if (tmp._11.isDefined) {
-      field(9) =  tmp._10
-      field(10) =  tmp._11
-      field(11) =  tmp._12
+      field :+  tmp._11.asInstanceOf[Boolean]
+      field :+  tmp._12.asInstanceOf[Boolean]
+      field :+  tmp._13.asInstanceOf[Boolean]
+    }*/
+    var field = "[" + resultfield.head._2 + "," + resultfield.head._3 + "," + resultfield.head._4 + "," +
+                      resultfield.head._5 + "," + resultfield.head._6 + "," + resultfield.head._7 + "," +
+                      resultfield.head._8 + "," + resultfield.head._9 + "," + resultfield.head._10
+    if (resultfield.head._11.isDefined && resultfield.head._12.isDefined && resultfield.head._13.isDefined) {
+      field = resultfield.head._11 + "," + resultfield.head._12 + "," + resultfield.head._13 + "]"
+    } else {
+      field = field + "]"
     }
+    //"field": """ + field.mkString("[", ", ", "]") + """,
+    println(field)
     val jsonString: String = {
       """
       {
-          "field": """ + field.mkString("[", ", ", "]") + """,
+          "field": """ + field + """,
           "dice" : {
-            "die1" : """ + 1 + """,
-            "die2" : """ + 1 + """
+            "die1" : """ + resultdice.head._1 + """,
+            "die2" : """ + resultdice.head._2 + """
           }
       }
       """.stripMargin
