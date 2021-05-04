@@ -22,7 +22,6 @@ import scala.collection.mutable
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.swing.Publisher
 import scala.util.{Failure, Success, Try}
-import de.htwg.se.shutthebox.model.DAOComponent.PlayerDAOInterface
 
 
 
