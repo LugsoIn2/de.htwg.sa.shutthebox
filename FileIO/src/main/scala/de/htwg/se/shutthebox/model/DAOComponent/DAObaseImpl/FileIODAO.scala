@@ -29,8 +29,6 @@ case class FileIODAO() extends FileIODAOInterface{
   val fieldSchema = TableQuery[FieldSchema]
   val diceSchema = TableQuery[DiceSchema]
 
-
-
   val setup = DBIO.seq((
     fieldSchema.schema
       ++ diceSchema.schema
@@ -63,8 +61,47 @@ case class FileIODAO() extends FileIODAOInterface{
     //initFieldTable(0, json, fieldSchema)
   }
 
-  override def read(): AnyRef = ???
+  override def read(): String = {
+    val resultdice = Await.result(db.run(diceSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
+    val resultfield = Await.result(db.run(fieldSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
 
+    println("YIELD:" + resultfield)
+    println("YIELD:" + resultfield.head)
+    println("YIELD:" + resultfield.head._1)
+    println("YIELD:" + resultfield.head._2)
+    println("LENGTHSDDSD:" + resultfield.length)
+
+    var field: Array[Any] = Array()
+
+    field(0) =  resultfield.head._2
+    field(1) =  resultfield.head._3
+    field(2) =  resultfield.head._4
+    field(3) =  resultfield.head._5
+    field(4) =  resultfield.head._6
+    field(5) =  resultfield.head._7
+    field(6) =  resultfield.head._8
+    field(7) =  resultfield.head._9
+    field(8) =  resultfield.head._10
+    if (resultfield(1)._11.isDefined) {
+      field(9) =  resultfield.head._10
+      field(10) =  resultfield.head._11
+      field(11) =  resultfield.head._12
+    }
+    val jsonString: String = {
+      """
+      {
+          "field": """ + field.mkString("[", ", ", "]") + """,
+          "dice" : {
+            "die1" : """ + 1 + """,
+            "die2" : """ + 1 + """
+          }
+      }
+      """.stripMargin
+
+    }
+    println("jsonString" + jsonString)
+    jsonString
+  }
   override def update(): Unit = ???
 
   override def delete(): Unit = ???

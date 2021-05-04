@@ -4,14 +4,20 @@ import com.google.inject.{Guice, Injector}
 import de.htwg.se.shutthebox.FileIOModule
 import de.htwg.se.shutthebox.model.DAOComponent.FileIODAOInterface
 import de.htwg.se.shutthebox.model.fileIoComponent.FileIOInterface
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsValue, Json}
+
+import scala.io.Source
 
 class FileIO extends FileIOInterface{
 
   val injector: Injector = Guice.createInjector(new FileIOModule)
   val dataBase: FileIODAOInterface = injector.getInstance(classOf[FileIODAOInterface])
 
-  override def load: JsValue = ???
+  override def load: JsValue = {
+    val source: String = dataBase.read()
+    val json: JsValue = Json.parse(source)
+    json
+  }
 
   override def save(field: JsValue): Unit = {
     dataBase.create(field)
