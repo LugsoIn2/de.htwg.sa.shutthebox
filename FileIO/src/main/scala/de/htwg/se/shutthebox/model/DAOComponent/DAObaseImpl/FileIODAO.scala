@@ -72,20 +72,20 @@ case class FileIODAO() extends FileIODAOInterface{
     println("LENGTHSDDSD:" + resultfield.length)
 
     var field: Array[Any] = Array()
-
-    field(0) =  resultfield.head._2
-    field(1) =  resultfield.head._3
-    field(2) =  resultfield.head._4
-    field(3) =  resultfield.head._5
-    field(4) =  resultfield.head._6
-    field(5) =  resultfield.head._7
-    field(6) =  resultfield.head._8
-    field(7) =  resultfield.head._9
-    field(8) =  resultfield.head._10
-    if (resultfield(1)._11.isDefined) {
-      field(9) =  resultfield.head._10
-      field(10) =  resultfield.head._11
-      field(11) =  resultfield.head._12
+    val tmp = resultfield.head
+    field(0) =  tmp._2
+    field(1) =  tmp._3
+    field(2) =  tmp._4
+    field(3) =  tmp._5
+    field(4) =  tmp._6
+    field(5) =  tmp._7
+    field(6) =  tmp._8
+    field(7) =  tmp._9
+    field(8) =  tmp._10
+    if (tmp._11.isDefined) {
+      field(9) =  tmp._10
+      field(10) =  tmp._11
+      field(11) =  tmp._12
     }
     val jsonString: String = {
       """
