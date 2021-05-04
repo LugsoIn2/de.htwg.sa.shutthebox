@@ -3,7 +3,7 @@ package de.htwg.se.shutthebox.model.DAOComponent.DAObaseImpl
 import de.htwg.se.shutthebox.model.DAOComponent.FileIODAOInterface
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsObject, JsValue}
 import slick.jdbc
 import slick.dbio.DBIO
 import slick.lifted.TableQuery
@@ -44,20 +44,23 @@ case class FileIODAO() extends FileIODAOInterface{
     //also das zuletzt gespeicherte
     //funzt auch genauso wie methode 2 unten
     val field = (json \ "field").as[Array[Boolean]]
+
     if (field.length == 9) {
-      val insertquery = DBIO.seq(fieldSchema += (1,field(0), field(1), field(2), field(3), field(4), field(5), field(6), field(7), field(8), None, None,None))
-      Await.result(db.run(insertquery), atMost = 10.second)
+      val insertqueryfield = DBIO.seq(fieldSchema += (1,field(0), field(1), field(2), field(3), field(4), field(5), field(6), field(7), field(8), None, None,None))
+      Await.result(db.run(insertqueryfield), atMost = 10.second)
     } else {
-      val insertquery = DBIO.seq(fieldSchema += (1,field(0), field(1), field(2), field(3), field(4), field(5), field(6), field(7), field(8), Some(field(9)), Some(field(10)), Some(field(11))))
-      Await.result(db.run(insertquery), atMost = 10.second)
+      val insertqueryfield = DBIO.seq(fieldSchema += (1,field(0), field(1), field(2), field(3), field(4), field(5), field(6), field(7), field(8), Some(field(9)), Some(field(10)), Some(field(11))))
+      Await.result(db.run(insertqueryfield), atMost = 10.second)
     }
+
+    val dices = (json \ "dice").as[JsObject]
+    val insertquerydice = DBIO.seq(diceSchema += (1, (dices \ "die1").as[Int], (dices \ "die2").as[Int]))
+    Await.result(db.run(insertquerydice), atMost = 10.second)
 
 
 
     //oder das bringt aber nicht viel, da auto encrease von db gemacht wird
     //initFieldTable(0, json, fieldSchema)
-
-
   }
 
   override def read(): AnyRef = ???
