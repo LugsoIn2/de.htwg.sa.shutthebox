@@ -18,3 +18,4 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion
 libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.3"
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
 libraryDependencies += "mysql" % "mysql-connector-java" % "6.0.6"
+libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.6.0"
