@@ -24,7 +24,7 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
   val gameCollection : MongoCollection[Document] = db.getCollection("game")
   val IDCollection : MongoCollection[Document] = db.getCollection("id")
   var id = 0
-
+  /*
   override def create(json: JsValue): Unit = {
     val IDDoc : Document = Document("_id" -> id.toString, "id" -> id)
     observableHandler(IDCollection.insertOne(IDDoc))
@@ -43,10 +43,19 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
 
     observableHandler(gameCollection.insertOne(fieldDoc))
   }
+  */
+
+  override def create(json: JsValue): Unit = {
+
+    val field = (json \ "field").as[Array[Boolean]].toList
+    val fieldDoc: Document = Document("field" -> field)
+
+    observableHandler(gameCollection.insertOne(fieldDoc))
+  }
 
   override def read(): String = {
 
-    val field = Await.result(gameCollection.find(equal("_id", id.toString)).first().head(), atMost = 10.second)
+    val field = Await.result(gameCollection.find().first().head(), atMost = 10.second)
     field.toJson()
   }
 
