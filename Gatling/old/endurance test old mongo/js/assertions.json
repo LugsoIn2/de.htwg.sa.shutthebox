@@ -1,0 +1,10 @@
+{
+  "simulation": "enduranceTest.RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1621363037841,
+  "description": "endurance test old mongo",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}

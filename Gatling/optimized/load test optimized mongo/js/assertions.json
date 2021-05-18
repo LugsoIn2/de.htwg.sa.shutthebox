@@ -1,0 +1,10 @@
+{
+  "simulation": "loadTest.RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1621350538783,
+  "description": "loadTest optimized",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}

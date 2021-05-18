@@ -1,0 +1,10 @@
+{
+  "simulation": "spikeTest.RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1621362573836,
+  "description": "spike test old mongo",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}

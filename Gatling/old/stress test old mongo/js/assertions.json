@@ -1,0 +1,10 @@
+{
+  "simulation": "stressTest.RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1621362752181,
+  "description": "stress test old mongo",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}
