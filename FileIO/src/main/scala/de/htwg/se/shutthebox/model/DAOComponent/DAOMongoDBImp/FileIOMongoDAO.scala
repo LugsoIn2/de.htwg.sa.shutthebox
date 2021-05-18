@@ -55,7 +55,7 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
 
   override def read(): String = {
 
-    val field = Await.result(gameCollection.find().first().head(), atMost = 10.second)
+    val field = Await.result(gameCollection.find().sort(equal("_id", -1)).limit(1).head(), atMost = 10.second)
     field.toJson()
   }
 
