@@ -11,6 +11,7 @@ class FileIOModule extends AbstractModule with ScalaModule {
   override def configure() = {
     bind[FileIOInterface].to[fileioDBImpl.FileIO]
     bind[FileIODAOInterface].toInstance(FileIOMongoDAO())
+    //bind[FileIODAOInterface].toInstance(FileIODAO())
 }
 
 }
