@@ -10,6 +10,9 @@ import slick.lifted.TableQuery
 import slick.jdbc.JdbcBackend.Database
 import slick.jdbc.MySQLProfile.api._
 
+import scala.concurrent.Future
+import scala.util.{Failure, Success}
+
 //import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, ExecutionContextExecutor}
@@ -52,8 +55,24 @@ case class FileIODAO() extends FileIODAOInterface{
   }
 
   override def read(): String = {
-    val resultdice = Await.result(db.run(diceSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
-    val resultfield = Await.result(db.run(fieldSchema.sortBy(_.id.desc).take(1).result), atMost = 10.second)
+    val resultDiceFuture: Future[Seq[(Int, Int, Int)]] = {
+      db.run(diceSchema.sortBy(_.id.desc).take(1).result)
+    }
+    resultDiceFuture.onComplete{
+      case Success(res) => println("Read Successfull")
+      case Failure(e) => println("Read Error: " + e)
+    }
+
+    val resultFieldFuture: Future[Seq[(Int, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean,
+                                      Boolean, Boolean, Option[Boolean], Option[Boolean], Option[Boolean])]] = {
+      db.run(fieldSchema.sortBy(_.id.desc).take(1).result)
+    }
+    resultFieldFuture.onComplete{
+      case Success(res) => println("Read Successfull")
+      case Failure(e) => println("Read Error: " + e)
+    }
+    val resultdice = Await.result(resultDiceFuture, 10.second)
+    val resultfield = Await.result(resultFieldFuture, 10.second)
 
     var field = "[" + resultfield.head._2 + "," + resultfield.head._3 + "," + resultfield.head._4 + "," +
                       resultfield.head._5 + "," + resultfield.head._6 + "," + resultfield.head._7 + "," +
