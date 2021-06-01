@@ -33,18 +33,18 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
   }
 
   override def read(): String = {
-
-    //val field = Await.result(gameCollection.find().sort(equal("_id", -1)).limit(1).head(), atMost = 10.second)
-    //field.toJson()
-    var ret = ""
-    val fieldFuture: Future[Document] =
+    val fieldFuture: Future[Document] = {
       gameCollection.find().sort(equal("_id", -1)).limit(1).head()
-    fieldFuture.onComplete {
-      case Success(res) => ret = res.toJson()
-      case Failure(e) => println(e)
     }
-    ret
+    fieldFuture.onComplete{
+      case Success(res) => println("Read Successfull")
+      case Failure(e) => println("Read Error: " + e)
+    }
+    Await.result(fieldFuture, 10.second).toJson()
   }
+
+
+
 
   override def update(): Unit = {
 
