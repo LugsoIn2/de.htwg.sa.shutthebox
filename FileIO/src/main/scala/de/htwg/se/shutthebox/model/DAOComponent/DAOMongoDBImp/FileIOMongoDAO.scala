@@ -11,7 +11,8 @@ import org.mongodb.scala.result.UpdateResult
 import play.api.libs.json.{JsObject, JsValue, Json}
 
 import scala.concurrent.duration.DurationInt
-import scala.concurrent.{Await, ExecutionContextExecutor}
+import scala.concurrent.{Await, ExecutionContextExecutor, Future}
+import scala.util.{Failure, Success, Try}
 
 case class FileIOMongoDAO() extends FileIODAOInterface {
 
@@ -33,8 +34,16 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
 
   override def read(): String = {
 
-    val field = Await.result(gameCollection.find().sort(equal("_id", -1)).limit(1).head(), atMost = 10.second)
-    field.toJson()
+    //val field = Await.result(gameCollection.find().sort(equal("_id", -1)).limit(1).head(), atMost = 10.second)
+    //field.toJson()
+    var ret = ""
+    val fieldFuture: Future[Document] =
+      gameCollection.find().sort(equal("_id", -1)).limit(1).head()
+    fieldFuture.onComplete {
+      case Success(res) => ret = res.toJson()
+      case Failure(e) => println(e)
+    }
+    ret
   }
 
   override def update(): Unit = {
