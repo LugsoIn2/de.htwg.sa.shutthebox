@@ -5,7 +5,6 @@ import de.htwg.se.shutthebox.controller.controllerComponent.ShutState.{apply => 
 import com.google.inject.{Guice, Inject, Injector}
 import com.google.inject.name.Names
 import de.htwg.se.shutthebox.ShutTheBoxModule
-//import net.codingwell.scalaguice.InjectorExtensions._
 import de.htwg.se.shutthebox.controller.controllerComponent._
 import de.htwg.se.shutthebox.controller.controllerComponent.aiBaseImpl.AI
 import de.htwg.se.shutthebox.model.fieldComponent.{dieInterface, fieldInterface}
@@ -18,13 +17,11 @@ import scala.swing.Publisher
 
 import scala.util.{Failure, Success, Try}
 
-//with Publisher
 class Controller extends ControllerInterface with Publisher {
   var players:Array[playerInterface] = Array.ofDim[playerInterface](2)
   var currentPlayer:playerInterface = players(0)
   var currentPlayerIndex = 0 // to determine, when to show scoreboard
   var matchfield : fieldInterface = _
-  //var dice = Array(new Die, new Die)
   var dice:Array[dieInterface] = Array.ofDim[dieInterface](2)
   var gameState : GameState = MENU
   var shutState : ShutState = SHUTSTATE0
@@ -40,7 +37,6 @@ class Controller extends ControllerInterface with Publisher {
   private var tmpLastShut = mutable.Stack[Int]()
 
   val injector: Injector = Guice.createInjector(new ShutTheBoxModule)
-  //val fileIo: FileIOInterface = injector.instance[FileIOInterface]
 
 
   def startGame(t:Integer, ai:Boolean): Unit = {
@@ -50,18 +46,14 @@ class Controller extends ControllerInterface with Publisher {
     createDice()
     createPlayers(ai)
     resetMatchfield()
-    //setCurrentPlayer()
     gameState=INGAME
   }
 
 
   def createField(t:Integer) : Unit = {
     if (t == 0)
-      //matchfield = injector.instance[fieldInterface](Names.named("normal"))
-      //matchfield = new Field()
       matchfield = injector.getInstance(classOf[fieldInterface])
     else
-      //matchfield = injector.instance[fieldInterface](Names.named("big"))
       matchfield = injector.getInstance(classOf[fieldInterface])
     publish(new FieldCreated)
   }
@@ -71,7 +63,6 @@ class Controller extends ControllerInterface with Publisher {
   }
 
   def createDice(): Unit = {
-    //dice = Array(new Die, new Die)
     for (i <- 0 to 1) {
       dice(i) = Die()
     }
@@ -80,12 +71,10 @@ class Controller extends ControllerInterface with Publisher {
 
 
   def createPlayers(ai:Boolean): Unit = {
-    //players(0) = injector.instance[playerInterface](Names.named("player1"))
     players(0) = injector.getInstance(classOf[playerInterface]).updateName("Player1")
     if (ai) {
       players(1) = new AI(this)
     } else {
-      //players(1) = injector.instance[playerInterface](Names.named("player2"))
       players(1) = injector.getInstance(classOf[playerInterface]).updateName("Player2")
     }
     currentPlayer = players(0)
@@ -107,8 +96,6 @@ class Controller extends ControllerInterface with Publisher {
   def setCurrentPlayer(): Unit = {
     currentPlayerIndex += 1
     if (currentPlayerIndex < 2) {
-      //players(currentPlayerIndex - 1) = currentPlayer.updateScore(getScore)
-      //print(players(currentPlayerIndex - 1))
       if (currentPlayer == players(0)){
         currentPlayer = currentPlayer.updateScore(getScore)
         players(0) = currentPlayer
@@ -129,8 +116,6 @@ class Controller extends ControllerInterface with Publisher {
       }
       publish(new CurrentPlayerSet)
     } else {
-      //currentPlayer = players(currentPlayerIndex - 1)
-      //players(currentPlayerIndex - 1 ) = currentPlayer.updateScore(getScore)
       if (currentPlayer == players(0)){
         currentPlayer = currentPlayer.updateScore(getScore)
         players(0) = currentPlayer
@@ -204,7 +189,6 @@ class Controller extends ControllerInterface with Publisher {
     if (gameState == ROLLDICE | gameState == SHUT | gameState == UNDOSTATE) {
 
       if((validNumber(0) == i | validNumber(1) == i) & shutState == SHUTSTATE0) {
-        //& !matchfield.field(validNumber(0)).isShut & !matchfield.field(validNumber(1)).isShut) {
         shut(i)
         shutState = SHUTSTATE5
       }else if((validNumber(0) == i | validNumber(1) == i) & shutState == SHUTSTATE5) {
@@ -328,13 +312,11 @@ class Controller extends ControllerInterface with Publisher {
   }
 
   def save():Unit = {
-    //fileIo.save(matchfield)
     //gameState = LOADED
     publish(new CellShut)
   }
 
   def load():Unit = {
-    //matchfield = fileIo.load
     publish(new GameLoaded)
     publish(new CellShut)
   }

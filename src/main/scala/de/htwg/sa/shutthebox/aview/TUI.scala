@@ -12,7 +12,6 @@ import scala.swing.Reactor
 
 import scala.util.{Failure, Success}
 
-//class TUI(field:Field, players:Array[Player], currentPlr:Player) {
 class TUI(controller:ControllerInterface) extends Reactor {
   listenTo(controller)
   print(printHeader())
