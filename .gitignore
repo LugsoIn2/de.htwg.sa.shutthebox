@@ -10,6 +10,10 @@ bin/
 .idea/
 target/
 
+# VS Code
+.metals
+.vscode
+
 # Maven
 log/
 target/
