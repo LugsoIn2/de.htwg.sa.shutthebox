@@ -33,14 +33,17 @@ object ShutTheBox {
       input = readLine()
       tui.processInputLine(input)
     }while (input != "q")
-    */
+    
     while (input != "q")
     do (
       input = scala.io.StdIn.readLine()
-      //tui.processInputLine(input)
-    )
-
-    
+      tui.processInputLine(input)
+    )*/
+    while 
+      input != "q" 
+    do 
+      input = scala.io.StdIn.readLine()
+      tui.processInputLine(input)
 
   }
 }
