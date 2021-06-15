@@ -37,7 +37,7 @@ case class FileIOMongoDAO() extends FileIODAOInterface {
       gameCollection.find().sort(equal("_id", -1)).limit(1).head()
     }
     fieldFuture.onComplete{
-      case Success(res) => println("Read Successfull")
+      case Success(_) => println("Read Successful")
       case Failure(e) => println("Read Error: " + e)
     }
     Await.result(fieldFuture, 10.second).toJson()

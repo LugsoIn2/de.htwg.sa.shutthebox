@@ -369,6 +369,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
               val JsonRes = Json.parse(body)
               println("post: " + body)
               updateField(JsonRes)
+            case Failure(_) => println("Post Call Error")
           }
         }
     }
@@ -391,7 +392,7 @@ class Controller @Inject() extends ControllerInterface with Publisher {
               println("get: " + JsonRes)
               updateField(JsonRes)
             }
-          case Failure(_) => println("something Wrong")
+          case Failure(_) => println("Get Call Error")
         }
       case Failure(_) => sys.error("something wrong")
     }
