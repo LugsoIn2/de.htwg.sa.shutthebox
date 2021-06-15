@@ -1,30 +1,0 @@
-
-…Lsrc/main/scala/de/htwg/sa/shutthebox/model/fieldComponent/dieInterface.scala*M
-8de/htwg/se/shutthebox/model/fieldComponent/dieInterface#*dieInterface€*U
-Cde/htwg/se/shutthebox/model/fieldComponent/dieInterface#`<init>`(). €@*<init>€*P
-@de/htwg/se/shutthebox/model/fieldComponent/dieInterface#start(). *start€*L
->de/htwg/se/shutthebox/model/fieldComponent/dieInterface#end(). *end€*P
-@de/htwg/se/shutthebox/model/fieldComponent/dieInterface#value(). *value€*N
-?de/htwg/se/shutthebox/model/fieldComponent/dieInterface#roll(). *roll€25
-$ 2+de/htwg/se/shutthebox/model/fieldComponent/2&
- #de/htwg/se/shutthebox/model/2 
- de/htwg/se/shutthebox/2
- de/htwg/se/2
- de/htwg/2
- 
-de/2F
- 8de/htwg/se/shutthebox/model/fieldComponent/dieInterface#2Q
- Cde/htwg/se/shutthebox/model/fieldComponent/dieInterface#`<init>`().2N
- @de/htwg/se/shutthebox/model/fieldComponent/dieInterface#start().2
- 
-scala/Int#2L
- 	>de/htwg/se/shutthebox/model/fieldComponent/dieInterface#end().2
-
- 
-scala/Int#2N
- @de/htwg/se/shutthebox/model/fieldComponent/dieInterface#value().2
- 
-scala/Int#2M
- 
-?de/htwg/se/shutthebox/model/fieldComponent/dieInterface#roll().2F
- 8de/htwg/se/shutthebox/model/fieldComponent/dieInterface#PZ D3834DF3DF1D22E5F775984150FE3016

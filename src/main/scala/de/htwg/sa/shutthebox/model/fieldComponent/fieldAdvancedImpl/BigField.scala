@@ -20,6 +20,7 @@ case class BigField(field:Array[Cell]) extends fieldInterface {
     field.field(number-1)
   }
 
+
   override def toString : String = {
     var output = ""
     output += "\n|==============================================================|\n "
@@ -42,4 +43,5 @@ case class BigField(field:Array[Cell]) extends fieldInterface {
 
     output
   }
+
 }

@@ -4,4 +4,3 @@ trait cellInterface {
   def value:Int
   def isShut:Boolean
 }
-

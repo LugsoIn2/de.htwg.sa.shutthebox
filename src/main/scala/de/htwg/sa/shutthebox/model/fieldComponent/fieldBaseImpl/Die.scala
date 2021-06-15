@@ -10,7 +10,7 @@ case class Die(start:Int = 1, end:Int = 6, value:Int = 1) extends dieInterface {
     newDie
   }
 
-  override def toString: String = {
+  override def toString : String = {
     value match {
       case 1 =>
         """

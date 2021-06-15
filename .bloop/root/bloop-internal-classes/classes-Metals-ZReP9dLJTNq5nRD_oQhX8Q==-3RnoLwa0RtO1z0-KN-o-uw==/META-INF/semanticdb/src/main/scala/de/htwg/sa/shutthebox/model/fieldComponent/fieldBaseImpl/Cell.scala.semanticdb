@@ -1,55 +1,0 @@
-
-‚Rsrc/main/scala/de/htwg/sa/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.scala*N
->de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell# €*Cell€*[
-Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#`<init>`(). €@*<init>€*a
-Pde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#`<init>`().(value) €*value€*c
-Qde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#`<init>`().(isShut) €*isShut€*U
-Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#value. €*value€*W
-Ede/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#isShut. €*isShut€*Z
-Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#toString().*toString€*R
-Ede/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#copy().*copy€*Z
-Lde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#copy().(value)*value€*\
-Mde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#copy().(isShut)*isShut€*f
-Ode/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#copy$default$1().*copy$default$1€*f
-Ode/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#copy$default$2().*copy$default$2€*N
-Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#_1().*_1€*N
-Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#_2().*_2€*M
->de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.
- *Cell€*T
-Fde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.apply().*apply€*[
-Mde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.apply().(value)*value€*]
-Nde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.apply().(isShut)*isShut€*X
-Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.unapply().*unapply€*Y
-Mde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.unapply().(x$1)*x$1€*Z
-Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.toString().*toString€*€
-\de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.$lessinit$greater$default$1().*$lessinit$greater$default$1€*€
-\de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell.$lessinit$greater$default$2().*$lessinit$greater$default$2€2C
-3 @9de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/25
-$ 2+de/htwg/se/shutthebox/model/fieldComponent/2&
- #de/htwg/se/shutthebox/model/2 
- de/htwg/se/shutthebox/2
- de/htwg/se/2
- de/htwg/2
- 
-de/29
-# 1+de/htwg/se/shutthebox/model/fieldComponent/2*
- "de/htwg/se/shutthebox/model/2$
- de/htwg/se/shutthebox/2
- de/htwg/se/2
-
- de/htwg/2
- 	de/2L
- >de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#2W
- Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#`<init>`().2
- 
-scala/Int#2
-) 0scala/Boolean#2G
-B O9de/htwg/se/shutthebox/model/fieldComponent/cellInterface#2R
- Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#value.2S
-! 'Ede/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#isShut.2W
- Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#toString().2"
- "scala/Predef.String#2%
-6 7java/lang/String#`+`().2
-0 1scala/Int#`+`().2R
-* /Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#value.2S
-8 >Ede/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Cell#isShut.PZ 0B3DB8666FCC7DB23647E52BFF62B5F2

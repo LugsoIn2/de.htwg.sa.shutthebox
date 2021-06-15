@@ -12,7 +12,8 @@ target/
 
 # VS Code
 .metals
-.vscode
+.bloop/
+.bloop/root
 
 # Maven
 log/
@@ -35,6 +36,7 @@ project/boot/
 project/plugins/project/
 project/target/
 project/project/
+project/.bloop/
 logs/
 project/.sbtserver
 .sbtserver/

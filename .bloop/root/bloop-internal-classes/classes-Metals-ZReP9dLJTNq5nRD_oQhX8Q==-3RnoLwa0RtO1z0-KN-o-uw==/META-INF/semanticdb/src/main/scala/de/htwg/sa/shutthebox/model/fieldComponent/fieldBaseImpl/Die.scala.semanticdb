@@ -1,99 +1,0 @@
-
-ä-Qsrc/main/scala/de/htwg/sa/shutthebox/model/fieldComponent/fieldBaseImpl/Die.scala*L
-=de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die# €*Die€*Z
-Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#`<init>`(). €@*<init>€*`
-Ode/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#`<init>`().(start) €*start€*\
-Mde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#`<init>`().(end) €*end€*`
-Ode/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#`<init>`().(value) €*value€*T
-Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#start. €*start€*P
-Ade/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#end. €*end€*T
-Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#value. €*value€*Q
-Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#roll().*roll€*
-local0 €*newDie€*
-local1 €*value$1€*
-local2 €*start$1€*
-local3 €*end$1€*Y
-Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#toString().*toString€*Q
-Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().*copy€*Y
-Kde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().(start)*start€*U
-Ide/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().(end)*end€*Y
-Kde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().(value)*value€*e
-Nde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy$default$1().*copy$default$1€*e
-Nde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy$default$2().*copy$default$2€*e
-Nde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy$default$3().*copy$default$3€*M
-Bde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#_1().*_1€*M
-Bde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#_2().*_2€*M
-Bde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#_3().*_3€*K
-=de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.
- *Die€*S
-Ede/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.apply().*apply€*Z
-Lde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.apply().(start)*start€*V
-Jde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.apply().(end)*end€*Z
-Lde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.apply().(value)*value€*W
-Gde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.unapply().*unapply€*X
-Lde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.unapply().(x$1)*x$1€*Y
-Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.toString().*toString€*
-[de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.$lessinit$greater$default$1().*$lessinit$greater$default$1€*
-[de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.$lessinit$greater$default$2().*$lessinit$greater$default$2€*
-[de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die.$lessinit$greater$default$3().*$lessinit$greater$default$3€2C
-3 @9de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/25
-$ 2+de/htwg/se/shutthebox/model/fieldComponent/2&
- #de/htwg/se/shutthebox/model/2 
- de/htwg/se/shutthebox/2
- de/htwg/se/2
- de/htwg/2
- 
-de/29
-# 1+de/htwg/se/shutthebox/model/fieldComponent/2*
- "de/htwg/se/shutthebox/model/2$
- de/htwg/se/shutthebox/2
- de/htwg/se/2
-
- de/htwg/2
- 	de/2K
- =de/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#2V
- Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#`<init>`().2
- 
-scala/Int#2
-" %
-scala/Int#2
-1 4
-scala/Int#2F
-B N8de/htwg/se/shutthebox/model/fieldComponent/dieInterface#2Q
- Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#start.2O
- !Ade/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#end.2Q
-+ 0Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#value.2R
- Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#roll().2F
- !8de/htwg/se/shutthebox/model/fieldComponent/dieInterface#2
- local02R
- Dde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().2
- local22
- local32Y
-  Kde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#copy().(value)2 
-R Sscala/Int#`+`(+4).2 
-) *scala/Int#`+`(+4).2Q
-# (Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#start.2,
-= Dscala/util/Random#nextInt(+1).2 
-6 <scala/util/Random.2
-1 5scala/util/2
-+ 0scala/2 
-I Jscala/Int#`-`(+3).2O
-E HAde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#end.2Q
-K PCde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#start.2
-		 
-local02V
- Hde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#toString().2"
- scala/Predef.String#2Q
- 	Cde/htwg/se/shutthebox/model/fieldComponent/fieldBaseImpl/Die#value.29
- +scala/collection/StringOps#stripMargin(+1).2+
- scala/Predef.augmentString().29
- +scala/collection/StringOps#stripMargin(+1).2+
- scala/Predef.augmentString().29
-%% +scala/collection/StringOps#stripMargin(+1).2+
- scala/Predef.augmentString().29
--- +scala/collection/StringOps#stripMargin(+1).2+
-'' scala/Predef.augmentString().29
-55 +scala/collection/StringOps#stripMargin(+1).2+
-// scala/Predef.augmentString().29
-== +scala/collection/StringOps#stripMargin(+1).2+
-77 scala/Predef.augmentString().PZ DA708D4D1ABB567B14303C39BC0F93CE
