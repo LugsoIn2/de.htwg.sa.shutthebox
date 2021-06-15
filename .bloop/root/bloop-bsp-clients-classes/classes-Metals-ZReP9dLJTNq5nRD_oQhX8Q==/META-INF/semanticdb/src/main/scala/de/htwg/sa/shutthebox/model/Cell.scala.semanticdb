@@ -1,0 +1,44 @@
+
+Á5src/main/scala/de/htwg/sa/shutthebox/model/Cell.scala*1
+!de/htwg/sa/shutthebox/model/Cell# €*Cell€*>
+,de/htwg/sa/shutthebox/model/Cell#`<init>`(). €@*<init>€*D
+3de/htwg/sa/shutthebox/model/Cell#`<init>`().(value) €*value€*F
+4de/htwg/sa/shutthebox/model/Cell#`<init>`().(isShut) €*isShut€*8
+'de/htwg/sa/shutthebox/model/Cell#value. €*value€*:
+(de/htwg/sa/shutthebox/model/Cell#isShut. €*isShut€*=
+,de/htwg/sa/shutthebox/model/Cell#toString().*toString€*5
+(de/htwg/sa/shutthebox/model/Cell#copy().*copy€*=
+/de/htwg/sa/shutthebox/model/Cell#copy().(value)*value€*?
+0de/htwg/sa/shutthebox/model/Cell#copy().(isShut)*isShut€*I
+2de/htwg/sa/shutthebox/model/Cell#copy$default$1().*copy$default$1€*I
+2de/htwg/sa/shutthebox/model/Cell#copy$default$2().*copy$default$2€*1
+&de/htwg/sa/shutthebox/model/Cell#_1().*_1€*1
+&de/htwg/sa/shutthebox/model/Cell#_2().*_2€*0
+!de/htwg/sa/shutthebox/model/Cell.
+ *Cell€*7
+)de/htwg/sa/shutthebox/model/Cell.apply().*apply€*>
+0de/htwg/sa/shutthebox/model/Cell.apply().(value)*value€*@
+1de/htwg/sa/shutthebox/model/Cell.apply().(isShut)*isShut€*;
++de/htwg/sa/shutthebox/model/Cell.unapply().*unapply€*<
+0de/htwg/sa/shutthebox/model/Cell.unapply().(x$1)*x$1€*=
+,de/htwg/sa/shutthebox/model/Cell.toString().*toString€*c
+?de/htwg/sa/shutthebox/model/Cell.$lessinit$greater$default$1().*$lessinit$greater$default$1€*c
+?de/htwg/sa/shutthebox/model/Cell.$lessinit$greater$default$2().*$lessinit$greater$default$2€2&
+ #de/htwg/sa/shutthebox/model/2 
+ de/htwg/sa/shutthebox/2
+ de/htwg/sa/2
+ de/htwg/2
+ 
+de/2/
+ !de/htwg/sa/shutthebox/model/Cell#2:
+ ,de/htwg/sa/shutthebox/model/Cell#`<init>`().2
+ 
+scala/Int#2
+( /scala/Boolean#25
+ 'de/htwg/sa/shutthebox/model/Cell#value.26
+  &(de/htwg/sa/shutthebox/model/Cell#isShut.2:
+ ,de/htwg/sa/shutthebox/model/Cell#toString().2%
+/ 0java/lang/String#`+`().2
+) *scala/Int#`+`().25
+# ('de/htwg/sa/shutthebox/model/Cell#value.26
+6 <(de/htwg/sa/shutthebox/model/Cell#isShut.PZ 1CFC17D8B331F53E62D23B153203C760
