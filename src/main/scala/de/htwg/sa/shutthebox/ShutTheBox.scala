@@ -6,19 +6,13 @@ import scala.io.StdIn.readLine
 import de.htwg.se.shutthebox.controller.controllerComponent.ControllerInterface
 import de.htwg.se.shutthebox.controller.controllerComponent.controllerBaseImpl.Controller
 
-
-
-object ShutTheBox {
-
+@main def shutthebox =
   val controller = new Controller()
 
 
   val tui = new TUI(controller)
-
-  def main(args: Array[String]): Unit = {
-
-
-    val name = "ShutTheBox"
+  println("Welcome to ShutTheBox")
+  val name = "ShutTheBox"
     var input = ""
 
     while 
@@ -26,10 +20,6 @@ object ShutTheBox {
     do 
       input = scala.io.StdIn.readLine()
       tui.processInputLine(input)
-
-  }
-}
-
 
 
 

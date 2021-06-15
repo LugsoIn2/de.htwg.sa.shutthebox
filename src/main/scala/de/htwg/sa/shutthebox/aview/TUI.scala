@@ -12,16 +12,16 @@ import scala.swing.Reactor
 
 import scala.util.{Failure, Success}
 
-class TUI(controller:ControllerInterface) extends Reactor {
+class TUI(controller:ControllerInterface) extends Reactor :
   listenTo(controller)
   print(printHeader())
 
 
 
-  def processInputLine(input: String): String = {
+  def processInputLine(input: String): String = 
 
 
-      input match {
+      input match 
         case "ss" => print(printStartGame())
                      controller.startGame(0, ai = false)
         case "sb" => print(printStartGame())
@@ -36,12 +36,12 @@ class TUI(controller:ControllerInterface) extends Reactor {
 
         case "q" => System.exit(0)
         //case "r" => controller.rollDice
-        case "r" => {
-          controller.rollDice match {
+        case "r" => 
+          controller.rollDice match 
             case Some(value) => println(value)
             case None => ""
-          }
-        }
+          
+        
         case "n" => nextPlayer()
         case "h" => print(printRules())
         case "1" => controller.cmdShut(1)
@@ -60,11 +60,11 @@ class TUI(controller:ControllerInterface) extends Reactor {
         case "12" => if (controller.getField.isInstanceOf[BigField])
                         controller.cmdShut(12)
         case default => ""
-      }
+      
       input
-  }
+  
 
-  def printHeader() : String = {
+  def printHeader() : String = 
     """
       |╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
       |║  ______   ___   ___   __  __   _________   _________  ___   ___   ______        _______   ______   __     __      ║
@@ -88,20 +88,20 @@ class TUI(controller:ControllerInterface) extends Reactor {
       |║                                      Press numbers (1 - 12) to shut the cells                                     ║
       |╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
       |""".stripMargin
-  }
+  
 
-  def printStartGame() : String = {
+  def printStartGame() : String = 
     """
       |---- NEW GAME ----
       |""".stripMargin
-  }
+  
 
-  def nextPlayer(): Unit = {
+  def nextPlayer(): Unit = 
     print("NEXT PLAYERS TURN!\n")
     controller.setCurrentPlayer()
-  }
+  
 
-  def printScoreBoard() : String = {
+  def printScoreBoard() : String = 
     var output = "\n"
     output += "========= SCOREBOARD ==========\n"
     output += controller.getPlayers(0).name
@@ -112,20 +112,20 @@ class TUI(controller:ControllerInterface) extends Reactor {
     output += controller.getPlayers(1).score + "\n"
     output += "==================================\n"
 
-    if (controller.getPlayers(0).score < controller.getPlayers(1).score) {
+    if controller.getPlayers(0).score < controller.getPlayers(1).score then
       output += controller.getPlayers(0).name
       output += " wins!!!\n"
-    } else if (controller.getPlayers(0).score > controller.getPlayers(1).score) {
+    else if controller.getPlayers(0).score > controller.getPlayers(1).score then
       output += controller.getPlayers(1).name
       output += " wins!!!\n"
-    } else {
+    else
       output += "The game ends in a draw! :-(\n"
-    }
+    end if
     output
-  }
+  
 
 
-  def printRules() : String = {
+  def printRules() : String =
     """
       |'SHUT THE BOX' ist ein einfaches, aber sehr verlockendes Würfelspiel.
       |Es kann als nettes Trinkspiel oder als kleines Gesellschaftsspiel für zwischendurch gespielt werden.
@@ -156,7 +156,7 @@ class TUI(controller:ControllerInterface) extends Reactor {
       |Somit hat das Team mit der höheren Punktzahl verloren und muss einen Kurzen trinken.
       |Danach geht das Ganze von vorne los. :-)
       |""".stripMargin
-  }
+  
 
   reactions += {
     case event: DiceRolled => print(controller.printOutput)
@@ -166,4 +166,3 @@ class TUI(controller:ControllerInterface) extends Reactor {
     case event: ShowScoreBoard => print(printScoreBoard())
     case event: AllCellsShut => print("All cells shut!!! :-)")
   }
-}
