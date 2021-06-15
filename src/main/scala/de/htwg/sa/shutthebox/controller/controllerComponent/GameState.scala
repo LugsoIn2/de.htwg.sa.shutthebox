@@ -1,5 +1,6 @@
 package de.htwg.se.shutthebox.controller.controllerComponent
 
+/*
 object GameState extends Enumeration {
   type GameState = Value
   val MENU, INGAME, ROLLDICE, SHUT, UNDOSTATE = Value
@@ -16,3 +17,14 @@ object GameState extends Enumeration {
       map(gameState)
     }
 }
+*/
+
+enum GameState(msg: String):
+  def message = msg
+  
+  case MENU extends GameState("")
+  case INGAME extends GameState("Ingame")  
+  case ROLLDICE extends GameState("Player can roll")
+  case SHUT extends GameState("Player can shut")
+  case UNDOSTATE extends GameState("Undo")
+end GameState

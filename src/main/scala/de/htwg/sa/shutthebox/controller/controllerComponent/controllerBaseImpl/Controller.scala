@@ -46,7 +46,8 @@ class Controller extends ControllerInterface with Publisher :
     createDice()
     createPlayers(ai)
     resetMatchfield()
-    gameState=INGAME
+    gameState = GameState.INGAME
+    
   
 
 
